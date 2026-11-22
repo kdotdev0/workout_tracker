@@ -64,7 +64,9 @@ async function readFile(event: Event) {
       </CardDescription>
     </CardHeader>
     <CardContent class="flex flex-col gap-3 px-5">
-      <Button size="lg" :disabled="busy" @click="download"><Download />Download JSON backup</Button>
+      <Button size="lg" variant="secondary" :disabled="busy" @click="download"
+        ><Download />Download JSON backup</Button
+      >
       <p v-if="exported" class="text-muted-foreground text-xs" role="status">
         Download requested. Check your phone's Files or Downloads before relying on this copy.
       </p>

@@ -196,7 +196,7 @@ function submit() {
           :aria-describedby="errorKey === item.key ? errorId : undefined"
           required
           :placeholder="item.placeholder"
-          class="set-input h-12 px-1 text-center text-lg font-bold tabular-nums"
+          class="set-input placeholder:text-muted-foreground/80 h-12 px-1 text-center text-lg font-bold tabular-nums placeholder:font-normal"
         />
       </div>
     </div>

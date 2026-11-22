@@ -80,7 +80,9 @@ const entries = computed(() =>
             year: 'numeric',
           })
         }}</time>
-        <span class="tabular-nums">{{ recordedSets }} sets recorded</span>
+        <span class="tabular-nums"
+          >{{ recordedSets }} {{ recordedSets === 1 ? 'set' : 'sets' }} recorded</span
+        >
       </div>
       <div class="flex items-center gap-3">
         <ExerciseProgress :exercises="session.exercises" class="flex-1" />
