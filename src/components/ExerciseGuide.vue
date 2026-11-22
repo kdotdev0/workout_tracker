@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import { ArrowRightLeft, ChevronDown, ExternalLink, OctagonAlert, Scale } from '@lucide/vue';
+import { ArrowRightLeft, Check, ChevronDown, ExternalLink, OctagonAlert, Scale } from '@lucide/vue';
 import type { Exercise } from '@/domain/programme-types';
 import { guides } from '@/domain/guides';
 import { demos } from '@/domain/demos';
@@ -38,14 +38,11 @@ const checks = computed(() => guide.value?.checks ?? props.exercise.cues);
       />
       <div class="flex flex-col gap-2">
         <h4 class="text-muted-foreground text-sm font-medium">Form check</h4>
-        <ol class="flex flex-col gap-1.5">
-          <li v-for="(check, index) in checks" :key="check" class="flex gap-2 leading-snug">
-            <span
-              class="bg-primary text-primary-foreground flex size-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold"
-              >{{ index + 1 }}</span
-            >{{ check }}
+        <ul class="flex flex-col gap-1.5">
+          <li v-for="check in checks" :key="check" class="flex gap-2 leading-snug">
+            <Check class="text-muted-foreground mt-0.5 size-4 shrink-0" />{{ check }}
           </li>
-        </ol>
+        </ul>
       </div>
     </div>
 
@@ -53,7 +50,7 @@ const checks = computed(() => guide.value?.checks ?? props.exercise.cues);
       <li
         v-for="item in guide.stop"
         :key="item"
-        class="text-destructive flex items-start gap-1.5 text-xs font-medium"
+        class="text-coral flex items-start gap-1.5 text-xs font-medium"
       >
         <OctagonAlert class="mt-0.5 size-3.5 shrink-0" />{{ item }}
       </li>
