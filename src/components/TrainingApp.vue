@@ -188,7 +188,8 @@ async function recordPushups(day: string, reps: number, onSaved?: () => void) {
     <AppToast :message="app.message.value" @dismiss="app.dismissMessage" />
     <UpdatePrompt :busy="busy" />
 
-    <nav v-if="ready" class="app-nav" aria-label="Main navigation">
+    <!-- Hidden mid-workout so a stray tap cannot leave the session; "Back to plan" exits. -->
+    <nav v-if="ready && view !== 'session'" class="app-nav" aria-label="Main navigation">
       <div class="app-nav-links relative grid grid-cols-5">
         <button
           v-for="item in nav"

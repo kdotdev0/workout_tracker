@@ -429,6 +429,37 @@
   background: var(--primary);
 }
 
+/* Rest countdown that stays reachable once the in-page timer scrolls away. */
+.timer-pill {
+  position: fixed;
+  z-index: 30;
+  bottom: max(16px, env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 48px;
+  padding-inline: 18px 20px;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--card) 88%, transparent);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  box-shadow:
+    var(--shadow-float),
+    inset 0 0 0 1px var(--edge);
+  font-size: 1.125rem;
+  font-weight: 600;
+  animation: pill-in 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes pill-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 12px);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

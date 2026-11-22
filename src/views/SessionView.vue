@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, nextTick, shallowRef, useTemplateRef } from 'vue';
-import { ArrowLeft, ChevronLeft, ChevronRight } from '@lucide/vue';
+import { ArrowLeft, BellRing, ChevronLeft, ChevronRight, Timer } from '@lucide/vue';
+import { useIntersectionObserver } from '@vueuse/core';
 import { formatDate } from '@/domain/dates';
 import { workouts } from '@/domain/programme';
 import { isExerciseComplete, sessionProgress } from '@/domain/sessions';
@@ -43,7 +44,24 @@ const selected = shallowRef(firstOpen === -1 ? props.session.exercises.length - 
 const confirmingFinish = shallowRef(false);
 const entry = computed(() => props.session.exercises[selected.value]!);
 const progress = computed(() => sessionProgress(props.session));
+const allDone = computed(() => progress.value.done === progress.value.total);
+const setsLogged = computed(() =>
+  props.session.exercises.reduce((total, item) => total + item.logs.length, 0),
+);
+// Start to last saved set; a session resumed on another day has no meaningful length.
+const minutesTrained = computed(() => {
+  const times = props.session.exercises.flatMap((item) => item.logs.map((log) => log.loggedAt));
+  if (!times.length) return null;
+  const last = Math.max(...times.map((time) => Date.parse(time)));
+  const minutes = Math.round((last - Date.parse(props.session.startedAt)) / 60000);
+  return minutes > 0 && minutes < 240 ? minutes : null;
+});
 const exerciseContent = useTemplateRef<HTMLElement>('exerciseContent');
+const timerBox = useTemplateRef<HTMLElement>('timerBox');
+const timerInView = shallowRef(true);
+useIntersectionObserver(timerBox, ([entry]) => {
+  timerInView.value = entry?.isIntersecting ?? true;
+});
 
 async function selectExercise(index: number) {
   if (index === selected.value) return;
@@ -99,17 +117,26 @@ async function selectExercise(index: number) {
       @swap="emit('swap', $event)"
     >
       <template #rest-timer>
-        <RestTimer
-          v-if="timerVisible"
-          :display="timerDisplay"
-          :done="timerDone"
-          :busy="busy"
-          :fraction="timerFraction"
-          @dismiss="emit('stopTimer')"
-          @adjust="emit('adjustTimer', $event)"
-        />
+        <div v-if="timerVisible" ref="timerBox">
+          <RestTimer
+            :display="timerDisplay"
+            :done="timerDone"
+            :busy="busy"
+            :fraction="timerFraction"
+            @dismiss="emit('stopTimer')"
+            @adjust="emit('adjustTimer', $event)"
+          />
+        </div>
       </template>
       <template #navigation>
+        <Button
+          v-if="allDone"
+          size="lg"
+          class="hero-action w-full text-base"
+          :disabled="busy"
+          @click="confirmingFinish = true"
+          >Finish workout</Button
+        >
         <nav class="grid grid-cols-2 gap-2" aria-label="Exercise navigation">
           <Button variant="outline" :disabled="selected === 0" @click="selectExercise(selected - 1)"
             ><ChevronLeft />Previous</Button
@@ -125,17 +152,32 @@ async function selectExercise(index: number) {
     </SessionExercise>
   </section>
 
-  <section class="flex flex-col gap-3 border-t pt-5">
+  <section v-if="!allDone" class="flex flex-col gap-3 border-t pt-5">
     <Button
       variant="outline"
       size="lg"
-      class="border-primary/40 text-primary rounded-2xl bg-transparent"
-      :disabled="busy || !session.exercises.some((item) => item.logs.length)"
+      class="rounded-2xl"
+      :disabled="busy || !setsLogged"
       @click="confirmingFinish = true"
     >
       Finish workout
     </Button>
   </section>
+
+  <button
+    v-if="timerVisible && !timerInView"
+    type="button"
+    :class="[
+      'timer-pill surface-edge font-display tabular-nums',
+      timerDone ? 'text-coral' : 'text-foreground',
+    ]"
+    :aria-label="timerDone ? 'Rest complete, show timer' : `Rest ${timerDisplay}, show timer`"
+    @click="timerBox?.scrollIntoView({ block: 'center', behavior: 'smooth' })"
+  >
+    <BellRing v-if="timerDone" class="size-4" /><Timer v-else class="text-primary size-4" />{{
+      timerDone ? 'Ready' : timerDisplay
+    }}
+  </button>
 
   <DialogRoot v-model:open="confirmingFinish">
     <DialogPortal>
@@ -143,20 +185,47 @@ async function selectExercise(index: number) {
       <DialogContent
         class="bg-card surface-edge fixed top-1/2 left-1/2 z-50 flex w-[calc(100%-32px)] max-w-sm -translate-x-1/2 -translate-y-1/2 flex-col gap-3 rounded-2xl p-5 shadow-2xl outline-none"
       >
-        <DialogTitle class="text-lg font-semibold">Finish this workout?</DialogTitle>
+        <DialogTitle class="text-lg font-semibold">
+          {{ allDone ? `${workouts[session.workoutId].name} done` : 'End workout early?' }}
+        </DialogTitle>
         <DialogDescription class="text-muted-foreground text-sm leading-6">
-          {{ progress.done }} of {{ progress.total }} exercises done.
           {{
-            progress.done < progress.total
-              ? 'This will be saved as a partial workout.'
-              : 'Your session will be marked complete.'
+            allDone
+              ? 'Every exercise is logged. Nice work.'
+              : 'Exercises you skipped stay open; this is saved as a partial workout.'
           }}
         </DialogDescription>
-        <div class="mt-1 grid grid-cols-2 gap-2">
+        <dl class="bg-secondary grid grid-cols-3 gap-2 rounded-xl p-3 text-center">
+          <div class="flex flex-col-reverse gap-1">
+            <dt class="text-muted-foreground text-xs">exercises</dt>
+            <dd class="font-display text-xl font-semibold tabular-nums">
+              {{ progress.done }}/{{ progress.total }}
+            </dd>
+          </div>
+          <div class="flex flex-col-reverse gap-1">
+            <dt class="text-muted-foreground text-xs">{{ setsLogged === 1 ? 'set' : 'sets' }}</dt>
+            <dd class="font-display text-xl font-semibold tabular-nums">{{ setsLogged }}</dd>
+          </div>
+          <div class="flex flex-col-reverse gap-1">
+            <dt class="text-muted-foreground text-xs">minutes</dt>
+            <dd class="font-display text-xl font-semibold tabular-nums">
+              {{ minutesTrained ?? '–' }}
+            </dd>
+          </div>
+        </dl>
+        <div v-if="allDone" class="mt-1 grid grid-cols-[repeat(auto-fit,minmax(8.5rem,1fr))] gap-2">
           <Button variant="outline" size="lg" :disabled="busy" @click="confirmingFinish = false">
             Keep training
           </Button>
           <Button size="lg" :disabled="busy" @click="emit('finish')">Finish workout</Button>
+        </div>
+        <div v-else class="mt-1 grid grid-cols-[repeat(auto-fit,minmax(8.5rem,1fr))] gap-2">
+          <Button variant="outline" size="lg" :disabled="busy" @click="emit('finish')">
+            Finish anyway
+          </Button>
+          <Button size="lg" :disabled="busy" @click="confirmingFinish = false">
+            Keep training
+          </Button>
         </div>
       </DialogContent>
     </DialogPortal>

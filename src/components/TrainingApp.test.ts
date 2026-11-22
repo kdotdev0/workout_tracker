@@ -114,6 +114,8 @@ describe('working app integration', () => {
     await wrapper.get('input[type="date"]').setValue('2026-11-20');
     await button(wrapper, 'Start workout').trigger('click');
     await vi.waitFor(() => expect(wrapper.get('main h1').text()).toBe('Barbell Romanian deadlift'));
+    // Focus mode: no tab bar mid-workout.
+    expect(wrapper.find('nav[aria-label="Main navigation"]').exists()).toBe(false);
     const saved = await savedData();
     expect(saved.sessions.slice(0, 2)).toEqual(sessions);
     expect(saved.settings.phase).toBe('intro');
@@ -474,8 +476,9 @@ describe('working app integration', () => {
     await vi.waitFor(() => expect(document.querySelector('[role="dialog"]')).not.toBeNull());
     const dialog = document.querySelector<HTMLElement>('[role="dialog"]')!;
     expect(dialog.textContent).toContain('saved as a partial workout');
+    expect(dialog.textContent).toContain('Keep training');
     [...dialog.querySelectorAll('button')]
-      .find((entry) => entry.textContent?.trim() === 'Finish workout')!
+      .find((entry) => entry.textContent?.trim() === 'Finish anyway')!
       .click();
     await vi.waitFor(() => expect(wrapper.text()).toContain('Completed · partial'));
     expect((await savedData()).sessions[0]!.status).toBe('completed');

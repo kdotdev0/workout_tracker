@@ -15,7 +15,7 @@ const circumference = 2 * Math.PI * 20;
     aria-label="Rest timer"
     :class="
       cn(
-        'flex flex-wrap items-center gap-2 rounded-xl py-2 pr-1 pl-2',
+        'flex items-center gap-1.5 rounded-xl py-2 pr-1 pl-2',
         done ? 'bg-coral-soft text-coral' : 'bg-card',
       )
     "
@@ -47,7 +47,7 @@ const circumference = 2 * Math.PI * 20;
       </svg>
       <BellRing v-if="done" class="size-5" />
     </span>
-    <div class="flex flex-1 flex-col">
+    <div class="flex min-w-0 flex-1 flex-col">
       <strong class="font-display text-2xl leading-none font-semibold tabular-nums">{{
         done ? 'Ready' : display
       }}</strong>
@@ -59,7 +59,7 @@ const circumference = 2 * Math.PI * 20;
       <Button
         variant="ghost"
         size="sm"
-        class="h-10 rounded-xl px-2.5 tabular-nums"
+        class="h-11 min-w-11 rounded-xl px-2 text-base tabular-nums"
         aria-label="15 seconds less rest"
         :disabled="busy"
         @click="emit('adjust', -15)"
@@ -68,7 +68,7 @@ const circumference = 2 * Math.PI * 20;
       <Button
         variant="ghost"
         size="sm"
-        class="h-10 rounded-xl px-2.5 tabular-nums"
+        class="h-11 min-w-11 rounded-xl px-2 text-base tabular-nums"
         aria-label="15 seconds more rest"
         :disabled="busy"
         @click="emit('adjust', 15)"
@@ -78,7 +78,7 @@ const circumference = 2 * Math.PI * 20;
     <Button
       variant="ghost"
       size="icon-lg"
-      class="rounded-lg hover:text-current"
+      class="ml-1 rounded-lg hover:text-current"
       aria-label="Dismiss rest timer"
       :disabled="busy"
       @click="emit('dismiss')"
