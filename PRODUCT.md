@@ -13,7 +13,7 @@ A personal companion for the approved four-day upper/lower strength and hypertro
 ## Confirmed constraints
 
 - Monday Upper A, Tuesday Lower A, Thursday Upper B, Friday Lower B; other days rest. If Friday is missed, use the workout switcher to select Lower B on Saturday.
-- The approved 14 November programme is defined in src/domain/programme.ts and documented in docs/PROGRAMME.md: 68 baseline sets, 56 Introduction sets, 18 distinct movements. Preserve exercise order, conditional equipment, the manual introductory phase and displayed-range progression. Floor reverse crunches are approved.
+- The approved 14 November programme is defined in src/domain/programme.ts and documented in docs/PROGRAMME.md: 68 baseline sets, 56 Introduction sets, 18 distinct movements. Preserve exercise order, conditional equipment, the manual introductory phase and displayed-range progression. No floor exercises: Lower B abs use the dip-station knee raise (changed 22 November 2026).
 - Date-first interface; one session title; readable prescriptions and front/back target-region maps.
 - Device-local saving first, independent JSON backup/restore, Google Drive backup later.
 - Personal research, gym photos, logs, and supplement labels must not enter public source control by default.

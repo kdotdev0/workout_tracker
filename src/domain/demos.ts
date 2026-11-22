@@ -235,6 +235,12 @@ export const demos: Readonly<Partial<Record<string, ExerciseDemo>>> = {
     difference:
       'A fixed straight bar is shown. Use your fixed handles, curl the pelvis toward the ribs and avoid swinging.',
   },
+  'dip-station-knee-raise': {
+    ...vimeo('1130705496'),
+    match: 'related',
+    difference:
+      'Hanging from a bar is shown. Hold yourself up on straight arms on the dip handles instead; the pelvic curl is the same.',
+  },
   'floor-reverse-crunch': {
     ...animation('reverse-crunch'),
     match: 'movement',

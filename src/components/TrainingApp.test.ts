@@ -117,7 +117,7 @@ describe('working app integration', () => {
     const saved = await savedData();
     expect(saved.sessions.slice(0, 2)).toEqual(sessions);
     expect(saved.settings.phase).toBe('intro');
-    expect(saved.sessions.at(-1)!.exercises.at(-1)!.exercise.id).toBe('floor-reverse-crunch');
+    expect(saved.sessions.at(-1)!.exercises.at(-1)!.exercise.id).toBe('dip-station-knee-raise');
   });
 
   it('keeps a shared page frame across tabs and workout logging', async () => {

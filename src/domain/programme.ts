@@ -437,19 +437,19 @@ const kneeRaise: Movement = {
   cues: [
     'Hang from fixed handles with shoulders controlled and begin without swinging.',
     'Curl the pelvis toward the ribs as the knees rise; lifting only the thighs is not the intended movement.',
-    'Lower under control. Use the floor reverse crunch if grip prevents controlled abdominal work.',
+    'Lower under control. Use the dip-station knee raise if grip prevents controlled abdominal work.',
   ],
   alternative: {
-    name: 'Floor reverse crunch',
+    name: 'Dip-station knee raise',
     movement: {
-      id: 'floor-reverse-crunch',
-      min: 10,
-      max: 20,
+      id: 'dip-station-knee-raise',
+      min: 8,
+      max: 15,
       unit: 'reps',
       perSide: false,
       loadKind: 'bodyweight',
     },
-    note: 'Same sets, RIR and rest. Lie on a clear floor with knees bent, curl the pelvis toward the ribs and lower slowly without swinging the legs.',
+    note: 'Same sets, RIR and rest. Hold yourself up on straight arms on the dip handles, curl the pelvis toward the ribs and lower slowly without swinging.',
   },
 };
 
@@ -550,22 +550,23 @@ const supportedSplitSquat: Movement = {
   },
 };
 
-const reverseCrunch: Movement = {
-  id: 'floor-reverse-crunch',
-  name: 'Floor reverse crunch',
+// Replaces the floor reverse crunch (no floor work); the old ID stays for saved sessions.
+const dipKneeRaise: Movement = {
+  id: 'dip-station-knee-raise',
+  name: 'Dip-station knee raise',
   unit: 'reps',
   perSide: false,
   restSeconds: 90,
   restLabel: '90 s',
   targetRir: '2',
   loadKind: 'bodyweight',
-  equipment: 'Body weight and clear non-slip floor space',
+  equipment: "Half rack's dip handles",
   primary: ['Abdominals'],
   supporting: [],
   cues: [
-    'Lie on your back with knees bent and arms beside you. Begin with a consistent knee bend.',
-    'Curl the pelvis toward the ribs, then lower slowly; do not swing the legs to create a larger movement.',
-    'Stop before losing pelvic control. Progress clean repetitions before making the lever more challenging.',
+    'Hold yourself up on straight arms with shoulders pushed down, legs hanging still.',
+    'Curl the pelvis toward the ribs as the knees rise; lifting only the thighs is not the intended movement.',
+    'Lower under control without swinging. Add reps before moving to the hanging version.',
   ],
   alternative: {
     name: 'Hanging knee raise with pelvic curl',
@@ -664,7 +665,7 @@ export const workouts: Record<WorkoutId, Workout> = {
       prescribe(seatedLegCurl, 3, 10, 15),
       prescribe(legExtension, 2, 10, 15),
       prescribe(standingCalf, 3, 8, 15),
-      prescribe(reverseCrunch, 2, 10, 20),
+      prescribe(dipKneeRaise, 2, 8, 15),
     ],
   },
 };

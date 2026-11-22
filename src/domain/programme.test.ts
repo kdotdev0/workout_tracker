@@ -39,7 +39,7 @@ const expectedTables = {
     ['seated-leg-curl', 3, 10, 15, 'reps', false, 120, '1–2', 'machine'],
     ['selection-leg-extension', 2, 10, 15, 'reps', false, 120, '1–2', 'machine'],
     ['supported-single-leg-standing-db-calf-raise', 3, 8, 15, 'reps', true, 120, '1–2', 'dumbbell'],
-    ['floor-reverse-crunch', 2, 10, 20, 'reps', false, 90, '2', 'bodyweight'],
+    ['dip-station-knee-raise', 2, 8, 15, 'reps', false, 90, '2', 'bodyweight'],
   ],
 };
 
@@ -163,15 +163,18 @@ describe('programme tables', () => {
     }
   });
 
-  it('includes the approved floor reverse crunch without assuming extra attachments', () => {
-    const reverse = workouts.lowerB.exercises.at(-1)!;
-    expect(reverse).toMatchObject({
-      id: 'floor-reverse-crunch',
+  it('trains abs on the dip handles, never on the floor', () => {
+    const abs = workouts.lowerB.exercises.at(-1)!;
+    expect(abs).toMatchObject({
+      id: 'dip-station-knee-raise',
       loadKind: 'bodyweight',
       unit: 'reps',
       perSide: false,
     });
-    expect(reverse.equipment).toContain('floor');
+    for (const exercise of Object.values(workouts).flatMap((workout) => workout.exercises)) {
+      expect(exercise.equipment.toLowerCase()).not.toContain('floor space');
+      expect(exercise.alternative.movement!.id).not.toBe('floor-reverse-crunch');
+    }
     expect(
       workouts.lowerB.exercises.some((exercise) => exercise.id === 'cable-anti-rotation-press'),
     ).toBe(false);

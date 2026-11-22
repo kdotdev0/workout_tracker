@@ -215,7 +215,7 @@ const exerciseGuides: Record<string, Guide> = {
     checks: [
       'Shoulders controlled, no swing',
       'Curl the pelvis toward the ribs',
-      'Use reverse crunch if grip limits you',
+      'Use the dip-station raise if grip limits you',
     ],
     stop: ['Stop when swinging or grip takes over.'],
   },
@@ -311,6 +311,15 @@ const exerciseGuides: Record<string, Guide> = {
       'Drive through the front leg, not the hand',
     ],
     stop: ['Support is for balance. Stop before pulling yourself up or losing the stance.'],
+  },
+  'dip-station-knee-raise': {
+    illustration: 'hanging-knee-raise',
+    checks: [
+      'Straight arms, shoulders pushed down',
+      'Curl the pelvis toward the ribs',
+      'Lower slowly, legs never swing',
+    ],
+    stop: ['Stop when the shoulders shrug up or the legs start swinging.'],
   },
   'floor-reverse-crunch': {
     illustration: 'reverse-crunch',
@@ -439,7 +448,14 @@ const evidence: Record<string, GuideEvidence> = {
     selection:
       'The intended abdominal work comes from curling the pelvis toward the ribs, with controlled lowering.',
     qualification:
-      'This is a movement-function selection, not a comparative growth winner. Use the reverse crunch if grip or swinging prevents the intended work.',
+      'This is a movement-function selection, not a comparative growth winner. Use the dip-station knee raise if grip or swinging prevents the intended work.',
+    sources: [researchSources.prescription],
+  },
+  'dip-station-knee-raise': {
+    selection:
+      'A supported pelvic curl gives the second abdominal exposure without a hanging-grip limit or floor work.',
+    qualification:
+      'This is a practical abdominal-flexion choice. A trial has not shown it to outperform every abdominal exercise.',
     sources: [researchSources.prescription],
   },
   'floor-reverse-crunch': {
