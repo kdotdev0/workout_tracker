@@ -2,7 +2,7 @@
 
 A phone-first workout tracker for a four-day upper/lower strength programme. It runs entirely in the browser, with no account and no backend, and can be installed on a phone as a PWA.
 
-Live: https://kdevdot.github.io/workout_tracker/
+Live: https://kdotdev0.github.io/workout_tracker/
 
 ## What it does
 
