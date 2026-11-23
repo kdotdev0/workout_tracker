@@ -68,7 +68,7 @@ Squat-strength day. Warm up 5 minutes on the bike, then perform 3–4 squat ramp
 | ------------------------------------------- | ------------------- | -------- | --- | ------------------ | ---------------------------------------------------------------- |
 | Barbell back squat                          | 3 × 5–8 reps        | 3–4 min  | 2   | Quads, Glutes      | Smith squat — 3 × 5–8 reps                                       |
 | Barbell Romanian deadlift                   | 2 × 6–10 reps       | 2–3 min  | 2   | Hamstrings, Glutes | DB Romanian deadlift — 2 × 6–10 reps                             |
-| Seated leg curl                             | 3 × 10–15 reps      | 90–120 s | 1–2 | Hamstrings         | Supine heel walkout — 3 × 4–8 cycles                             |
+| Seated leg curl                             | 3 × 10–15 reps      | 90–120 s | 1–2 | Hamstrings         | Standing one-leg cable curl — 3 × 10–15 reps/side                |
 | Leg extension                               | 2 × 10–15 reps      | 90–120 s | 1–2 | Quads              | UNICA leg extension — 2 × 10–15 reps                             |
 | Supported single-leg standing DB calf raise | 3 × 8–15 reps/side  | 90–120 s | 1–2 | Calves             | Supported bodyweight single-leg calf raise — 3 × 15–25 reps/side |
 | Hanging knee raise with pelvic curl         | 2 × 8–15 reps       | 90 s     | 2   | Abdominals         | Dip-station knee raise — 2 × 8–15 reps                           |
@@ -100,7 +100,7 @@ Hinge and unilateral-leg day. Warm up 5 minutes, rehearse the hinge, then perfor
 | ------------------------------------------- | ------------------- | -------- | --- | ------------------ | ---------------------------------------------------------------- |
 | Barbell Romanian deadlift                   | 2 × 6–10 reps       | 2–3 min  | 2   | Hamstrings, Glutes | DB Romanian deadlift — 2 × 6–10 reps                             |
 | Supported DB stationary split squat         | 3 × 8–12 reps/side  | 2–3 min  | 2   | Quads, Glutes      | Smith squat — 3 × 8–12 reps                                      |
-| Seated leg curl                             | 3 × 10–15 reps      | 90–120 s | 1–2 | Hamstrings         | Supine heel walkout — 3 × 4–8 cycles                             |
+| Seated leg curl                             | 3 × 10–15 reps      | 90–120 s | 1–2 | Hamstrings         | Standing one-leg cable curl — 3 × 10–15 reps/side                |
 | Leg extension                               | 2 × 10–15 reps      | 90–120 s | 1–2 | Quads              | UNICA leg extension — 2 × 10–15 reps                             |
 | Supported single-leg standing DB calf raise | 3 × 8–15 reps/side  | 90–120 s | 1–2 | Calves             | Supported bodyweight single-leg calf raise — 3 × 15–25 reps/side |
 | Dip-station knee raise                      | 2 × 8–15 reps       | 90 s     | 2   | Abdominals         | Hanging knee raise with pelvic curl — 2 × 8–15 reps              |
@@ -148,7 +148,7 @@ Glute sets share lower-body compounds, and arms receive additional pulling/press
 | Supported DB stationary split squat         | One DB, fixed rack upright for balance, floor. Keep both feet on the floor in a stable staggered stance, rear foot down. Use the upright lightly for balance and hold one DB. Lower through a controlled range and drive mainly through the front leg; do not pull yourself up with the support hand. Record the weight of the single DB. Do not compare it directly with older unsupported two-DB split squats. Complete both sides for one set. Start with the weaker side and match clean reps. Allow time to switch sides, then take the listed rest; extend it if needed. Choose a load that fits the displayed rep range and RIR. Add clean reps before resistance; keep the setup and range consistent. |
 | Dip-station knee raise                      | Half rack's dip handles. Hold yourself up on straight arms with shoulders pushed down, legs hanging still. Curl the pelvis toward the ribs as the knees rise; lifting only the thighs is not the intended movement. Lower under control without swinging. Add reps before moving to the hanging version.                                                                                                                                                                                                                                                                                                                                                                                                       |
 
-No unverified ankle cuff, rope, calf platform, assisted-pull-up machine or leg press is required. The heel-walkout alternative needs only a clear non-slip floor and is not claimed equivalent to machine curls. Abdominal work uses the dip handles or fixed overhead handles; there is no floor work (changed 22 November 2026).
+No unverified ankle cuff, rope, calf platform, assisted-pull-up machine or leg press is required. The leg-curl alternative uses the cable ankle strap and is not claimed equivalent to machine curls. Abdominal work uses the dip handles or fixed overhead handles; there is no floor work (changed 22 November 2026).
 
 ## Progression and recovery review
 
@@ -159,7 +159,7 @@ No unverified ankle cuff, rope, calf platform, assisted-pull-up machine or leg p
 5. **Use the smallest available increment:** the app does not assume that the next barbell increase is 2.5 kg or that every stack jump is appropriate. Keep a heavier load only if the lower rep bound and target reserve remain achievable.
 6. **No hidden extra-rep threshold:** lateral raises progress against 20 reps and overhead extensions against 15, as displayed. If the next equipment jump is too large, repeat the current load with consistent execution rather than forcing the increase.
 7. **Log load conventions consistently:** barbell totals include the bar; DB values are per DB. The supported split squat uses one DB and a separate history ID from the older unsupported two-DB version. Machine, cable, Smith and free-weight loads are separate tracks.
-8. **Bodyweight work:** improve clean reps and pelvic control first. A harder lever or version changes the comparison; use a consistent version when judging progress. One heel-walkout repetition is a full out-and-back cycle.
+8. **Bodyweight work:** improve clean reps and pelvic control first. A harder lever or version changes the comparison; use a consistent version when judging progress.
 9. **Review every two weeks during an eight-week block:** check comparable performance, effort, setup and recovery. A three-exposure flag is a performance check, not proof of a physiological plateau or an automatic deload instruction.
 10. **Count extra work:** demanding daily push-ups add pressing work; do not treat them as unlimited bonus volume.
 

@@ -345,16 +345,16 @@ const seatedLegCurl: Movement = {
     'Choose a load that fits the displayed rep range and RIR. Add clean reps before resistance; keep the setup and range consistent.',
   ],
   alternative: {
-    name: 'Supine heel walkout',
+    name: 'Standing one-leg cable curl',
     movement: {
-      id: 'supine-heel-walkout',
-      min: 4,
-      max: 8,
-      unit: 'cycles',
-      perSide: false,
-      loadKind: 'bodyweight',
+      id: 'standing-one-leg-cable-curl',
+      min: 10,
+      max: 15,
+      unit: 'reps',
+      perSide: true,
+      loadKind: 'cable',
     },
-    note: 'Same sets, RIR and rest. On a clear non-slip floor, bridge with heels planted, walk the feet out and back under control. One full out-and-back is one cycle. This is a knee-flexion workaround, not a claim of equivalence to machine curls.',
+    note: 'Same sets, RIR and rest. Ankle strap on the low cable, face the stack and hold it for balance. Curl the heel toward the glute without the hip swinging forward. Not equivalent to the machine curl; track it separately.',
   },
 };
 

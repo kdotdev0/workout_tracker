@@ -12,7 +12,6 @@ export type MotionKind =
   | 'bodyweight-calf'
   | 'smith-incline'
   | 'cable-fly'
-  | 'heel-walkout'
   | 'landmine-row'
   | 'pallof'
   | 'seated-calf';
@@ -58,7 +57,6 @@ export const motionKinds: MotionKind[] = [
   'bodyweight-calf',
   'smith-incline',
   'cable-fly',
-  'heel-walkout',
   'landmine-row',
   'pallof',
   'seated-calf',
@@ -297,26 +295,6 @@ export function motionFrame(kind: MotionKind, phase: number): MotionFrame {
     rail([188, 22], [188, 178], 4);
     rail([94, hand[1]], [194, hand[1]], 5);
     frame.weights.push({ at: [100, hand[1]], r: 8 }, { at: [188, hand[1]], r: 8 });
-  } else if (kind === 'heel-walkout') {
-    frame.cue = 'Keep the bridge; walk the heels out, then back.';
-    const hip: Point = [151, 132];
-    torso(hip, [100, 157], [81, 157]);
-    line([100, 157], [119, 168]);
-    line([119, 168], [144, 168]);
-    const index = Math.min(7, Math.floor(p * 8)),
-      f = p * 8 - index,
-      smooth = (1 - Math.cos(f * Math.PI)) / 2;
-    const sequences = [
-      [191, 202, 202, 213, 213, 202, 202, 191, 191],
-      [191, 191, 202, 202, 213, 213, 202, 202, 191],
-    ];
-    for (const [i, xs] of sequences.entries()) {
-      const moving = xs[index] !== xs[index + 1];
-      const x = lerp(xs[index]!, xs[index + 1]!, smooth);
-      const ankle: Point = [x, 174 - (moving ? Math.sin(f * Math.PI) * 3 : 0)];
-      leg(hip, joint(hip, ankle, 38, 38, -1), ankle, shift(ankle, 10, -8), i ? 'active' : 'muted');
-      line(ankle, shift(ankle, -3, 4), i ? 'active' : 'muted', 5);
-    }
   } else if (kind === 'landmine-row') {
     frame.cue = 'Hinge stays still; row the anchored bar toward the trunk.';
     torso([169, 103], [208, 75], [226, 61]);

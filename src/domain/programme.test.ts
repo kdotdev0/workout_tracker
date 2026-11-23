@@ -179,8 +179,8 @@ describe('programme tables', () => {
       workouts.lowerB.exercises.some((exercise) => exercise.id === 'cable-anti-rotation-press'),
     ).toBe(false);
     const curl = workouts.lowerA.exercises.find((exercise) => exercise.id === 'seated-leg-curl')!;
-    expect(curl.alternative.movement).toMatchObject({ unit: 'cycles', loadKind: 'bodyweight' });
-    expect(curl.alternative.note).not.toContain('ankle strap');
+    expect(curl.alternative.movement).toMatchObject({ unit: 'reps', loadKind: 'cable' });
+    expect(curl.alternative.note).not.toContain('floor');
   });
 
   it('matches the approved weekly muscle coverage without doubling unilateral sets', () => {

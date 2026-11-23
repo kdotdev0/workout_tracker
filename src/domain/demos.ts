@@ -43,7 +43,7 @@ function animation(motion: MotionKind): VideoMedia {
     motion,
     durationSeconds: 5,
     credit: 'Movement diagram · Steady',
-    creditUrl: 'https://github.com/kdevdot/workout_tracker',
+    creditUrl: 'https://github.com/kdotdev0/workout_tracker',
   };
 }
 
@@ -297,9 +297,15 @@ export const demos: Readonly<Partial<Record<string, ExerciseDemo>>> = {
     ...animation('cable-fly'),
     match: 'movement',
   },
-  'supine-heel-walkout': {
-    ...animation('heel-walkout'),
-    match: 'movement',
+  'standing-one-leg-cable-curl': {
+    ...file('seated-leg-curl', 12, {
+      ...wger,
+      creditUrl:
+        'https://wger.de/media/exercise-video/366/43df4b79-d4c3-4fbf-bcb5-e0d825b84120.MOV',
+    }),
+    match: 'related',
+    difference:
+      'A seated machine curl is shown. Stand at the low cable with the ankle strap; the knee-curl path is the same.',
   },
   'unica-leg-extension': {
     ...animation('leg-extension'),
