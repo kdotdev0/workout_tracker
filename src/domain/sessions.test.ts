@@ -7,6 +7,7 @@ import {
   bestSet,
   alternativeOf,
   finishSession,
+  improvedExercises,
   nextTarget,
   previousPerformance,
   recordSet,
@@ -124,6 +125,34 @@ describe('next-session target', () => {
     const current = startSession('upperA', '2026-12-01', 'intro');
     return nextTarget(history, current, current.exercises[0]!.exercise);
   };
+
+  it('names exercises that beat their last session, by load then reps', () => {
+    const last = done('2026-11-02', [
+      [40, 6],
+      [40, 6],
+    ]);
+    const name = last.exercises[0]!.exercise.name;
+    expect(
+      improvedExercises(
+        [last],
+        done('2026-11-09', [
+          [40, 6],
+          [40, 7],
+        ]),
+      ),
+    ).toEqual([name]);
+    expect(improvedExercises([last], done('2026-11-09', [[42.5, 5]]))).toEqual([name]);
+    expect(
+      improvedExercises(
+        [last],
+        done('2026-11-09', [
+          [40, 6],
+          [40, 6],
+        ]),
+      ),
+    ).toEqual([]);
+    expect(improvedExercises([], done('2026-11-09', [[40, 6]]))).toEqual([]);
+  });
 
   it('suggests the smallest available increase without guessing plate increments', () => {
     expect(

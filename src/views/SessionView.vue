@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { computed, nextTick, shallowRef, useTemplateRef } from 'vue';
-import { ArrowLeft, BellRing, ChevronLeft, ChevronRight, Timer } from '@lucide/vue';
+import { ArrowLeft, BellRing, ChevronLeft, ChevronRight, Timer, TrendingUp } from '@lucide/vue';
 import { useIntersectionObserver } from '@vueuse/core';
 import { formatDate } from '@/domain/dates';
 import { workouts } from '@/domain/programme';
-import { isExerciseComplete, sessionProgress } from '@/domain/sessions';
+import { improvedExercises, isExerciseComplete, sessionProgress } from '@/domain/sessions';
 import type { Session, SetLog } from '@/domain/state';
 import { Button } from '@/components/ui/button';
 import {
@@ -56,6 +56,9 @@ const minutesTrained = computed(() => {
   const minutes = Math.round((last - Date.parse(props.session.startedAt)) / 60000);
   return minutes > 0 && minutes < 240 ? minutes : null;
 });
+const improved = computed(() =>
+  confirmingFinish.value ? improvedExercises(props.history, props.session) : [],
+);
 const exerciseContent = useTemplateRef<HTMLElement>('exerciseContent');
 const timerBox = useTemplateRef<HTMLElement>('timerBox');
 const timerInView = shallowRef(true);
@@ -213,6 +216,13 @@ async function selectExercise(index: number) {
             </dd>
           </div>
         </dl>
+        <div v-if="improved.length" class="flex gap-2 text-sm leading-snug">
+          <TrendingUp class="text-primary mt-0.5 size-4 shrink-0" />
+          <p>
+            <span class="font-semibold">Beat last time:</span>
+            {{ improved.join(', ') }}
+          </p>
+        </div>
         <div v-if="allDone" class="mt-1 grid grid-cols-[repeat(auto-fit,minmax(8.5rem,1fr))] gap-2">
           <Button variant="outline" size="lg" :disabled="busy" @click="confirmingFinish = false">
             Keep training

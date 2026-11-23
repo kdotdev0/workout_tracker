@@ -213,6 +213,16 @@ function score(logs: SetLog[]): [number, number] {
 const beats = (a: [number, number], b: [number, number]) =>
   a[0] > b[0] || (a[0] === b[0] && a[1] > b[1]);
 
+/** Exercises in this session that out-scored their previous completed exposure. */
+export function improvedExercises(sessions: readonly Session[], session: Session): string[] {
+  return session.exercises
+    .filter((entry) => {
+      const previous = previousPerformance(sessions, session, entry.exercise.id);
+      return entry.logs.length && previous && beats(score(entry.logs), score(previous.logs));
+    })
+    .map((entry) => entry.exercise.name);
+}
+
 /**
  * Progress at the displayed upper rep bound and reserve, after completing the current
  * working-set prescription. Adding sets during a phase change comes before a heavier load.
