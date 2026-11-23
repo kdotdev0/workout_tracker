@@ -86,21 +86,27 @@ useEventListener(disclosure, 'toggle', () => {
         :label="exerciseName"
         :playing="true"
       />
-      <video
+      <!-- Portrait clips sit on a blurred copy of their poster instead of flat side bars. -->
+      <div
         v-else-if="!failed && demo.kind === 'file'"
-        :key="`${exerciseId}-${retry}`"
-        :src="source"
-        :poster="poster"
-        :aria-label="`Exercise demonstration: ${exerciseName}`"
-        controls
-        autoplay
-        muted
-        loop
-        playsinline
-        preload="none"
-        class="max-h-96 w-full rounded-2xl bg-secondary object-contain"
-        @error="failed = true"
-      />
+        class="bg-secondary relative overflow-hidden rounded-2xl"
+      >
+        <img :src="poster" alt="" aria-hidden="true" class="demo-backdrop" />
+        <video
+          :key="`${exerciseId}-${retry}`"
+          :src="source"
+          :poster="poster"
+          :aria-label="`Exercise demonstration: ${exerciseName}`"
+          controls
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="none"
+          class="relative max-h-96 w-full object-contain"
+          @error="failed = true"
+        />
+      </div>
       <div v-else-if="!failed" class="relative aspect-video overflow-hidden rounded-2xl bg-black">
         <iframe
           :key="`${exerciseId}-${retry}`"
@@ -157,15 +163,24 @@ useEventListener(disclosure, 'toggle', () => {
         :label="exerciseName"
         :playing="false"
       />
-      <img
-        v-else-if="!posterFailed"
-        :src="poster"
-        alt=""
-        loading="lazy"
-        decoding="async"
-        class="size-full object-contain"
-        @error="posterFailed = true"
-      />
+      <template v-else-if="!posterFailed">
+        <img
+          :src="poster"
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          class="demo-backdrop"
+          @error="posterFailed = true"
+        />
+        <img
+          :src="poster"
+          alt=""
+          loading="lazy"
+          decoding="async"
+          class="relative size-full object-contain"
+          @error="posterFailed = true"
+        />
+      </template>
       <span v-else class="text-muted-foreground absolute top-3 px-4 text-sm font-medium">
         {{ exerciseName }}
       </span>
