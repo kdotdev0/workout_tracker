@@ -65,7 +65,7 @@ const days = computed(() =>
     </div>
 
     <div
-      class="bg-card surface-edge grid grid-cols-7 gap-[4px] rounded-xl p-[6px]"
+      class="week-grid bg-card surface-edge grid grid-cols-7 gap-[4px] rounded-xl p-[6px]"
       aria-label="Week dates"
     >
       <button

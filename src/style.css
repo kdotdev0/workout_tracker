@@ -295,6 +295,11 @@
 }
 
 @container week-strip (width < 20em) {
+  /* Give the seven day buttons the spacing back on the narrowest phones. */
+  .week-grid {
+    gap: 2px;
+    padding: 2px;
+  }
   .week-day-short {
     display: none;
   }
