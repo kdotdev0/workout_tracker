@@ -619,6 +619,41 @@ describe('working app integration', () => {
     expect(wrapper.text()).toContain('Settings & data');
   });
 
+  it('does not start a rest timer after the last set of the workout', async () => {
+    const session = startSession('upperA', '2026-11-16', 'intro');
+    const [last, ...rest] = [...session.exercises].reverse();
+    let almost = session;
+    for (const entry of rest)
+      for (let index = 1; index <= entry.exercise.sets; index++)
+        almost = recordSet(almost, entry.exercise.id, {
+          index,
+          load: entry.exercise.loadKind === 'bodyweight' ? null : 20,
+          reps: entry.exercise.min,
+          effort: 3,
+          loggedAt: new Date(2026, 10, 16, 18).toISOString(),
+        });
+    almost = recordSet(almost, last!.exercise.id, {
+      index: 1,
+      load: last!.exercise.loadKind === 'bodyweight' ? null : 20,
+      reps: last!.exercise.min,
+      effort: 3,
+      loggedAt: new Date(2026, 10, 16, 18).toISOString(),
+    });
+    const database = await openDB(databaseName, 1, {
+      upgrade: (entry) => entry.createObjectStore('records'),
+    });
+    await database.put('records', { ...emptyState(), sessions: [almost] }, 'state');
+    database.close();
+    vi.setSystemTime(new Date(2026, 10, 16, 18, 30));
+    const wrapper = await app();
+    await wrapper.get('input[type="date"]').setValue('2026-11-16');
+    await button(wrapper, 'Resume workout').trigger('click');
+    await vi.waitFor(() => expect(wrapper.find('form.set-form').exists()).toBe(true));
+    await wrapper.get('form.set-form').trigger('submit');
+    await vi.waitFor(() => expect(wrapper.text()).toContain('Set saved on this device.'));
+    expect((await savedData()).timer).toBeNull();
+  });
+
   it('shows a storage error instead of resetting an unsupported saved schema', async () => {
     const database = await openDB(databaseName, 1, {
       upgrade: (entry) => entry.createObjectStore('records'),

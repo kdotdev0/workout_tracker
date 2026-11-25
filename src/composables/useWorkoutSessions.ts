@@ -2,6 +2,7 @@ import type { Ref } from 'vue';
 import { localDate } from '@/domain/dates';
 import {
   finishSession,
+  isExerciseComplete,
   isUntouchedSession,
   recordSet,
   restFor,
@@ -58,6 +59,9 @@ export function useWorkoutSessions({
     const entry = active?.exercises.find((item) => item.exercise.id === exerciseId);
     if (!active || !entry) return;
     const correcting = entry.logs.some((existing) => existing.index === log.index);
+    const recorded = recordSet(active, exerciseId, log);
+    // No rest after the workout's last set.
+    const lastSet = recorded.exercises.every(isExerciseComplete);
     const saved = await update((current) => ({
       ...current,
       sessions: current.sessions.map((session) =>
@@ -65,12 +69,14 @@ export function useWorkoutSessions({
       ),
       timer: correcting
         ? current.timer
-        : {
-            sessionId: active.id,
-            exerciseId,
-            endsAt:
-              Date.now() + restFor(entry.exercise, current.settings.restMinutes).seconds * 1000,
-          },
+        : lastSet
+          ? null
+          : {
+              sessionId: active.id,
+              exerciseId,
+              endsAt:
+                Date.now() + restFor(entry.exercise, current.settings.restMinutes).seconds * 1000,
+            },
     }));
     if (saved) navigator.vibrate?.(15);
     if (saved)
