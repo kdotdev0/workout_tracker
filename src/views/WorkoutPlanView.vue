@@ -17,6 +17,7 @@ const props = defineProps<{
   workoutId: WorkoutId | null;
   phase: Phase;
   readyForBaseline: boolean;
+  missed: WorkoutId | null;
   restMinutes: number | null;
   session: Session | null;
   completed: Session | null;
@@ -117,6 +118,15 @@ function chooseWorkout(event: Event) {
       </p>
     </div>
     <div class="flex flex-col gap-4">
+      <p
+        v-if="missed"
+        class="bg-secondary flex flex-wrap items-center gap-x-1 rounded-lg px-3 py-2 text-xs leading-5"
+      >
+        You missed {{ workouts[missed].name }} this week.
+        <Button variant="link" size="sm" class="h-auto p-0 text-xs" @click="emit('workout', missed)"
+          >Do it today</Button
+        >
+      </p>
       <p
         v-if="workout && readyForBaseline && !shown"
         class="bg-secondary flex flex-wrap items-center gap-x-1 rounded-lg px-3 py-2 text-xs leading-5"

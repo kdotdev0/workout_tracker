@@ -1,4 +1,5 @@
-import { getExercises } from './programme';
+import { getExercises, workoutForDate } from './programme';
+import { weekFor } from './dates';
 import type { Phase, WorkoutId } from './programme-types';
 import type { Exercise } from './programme-types';
 import { sessionSchema, setSchema, type Session, type SetLog } from './state';
@@ -160,6 +161,24 @@ export function finishForgotten(sessions: readonly Session[], now = Date.now()) 
     return done;
   });
   return { sessions: next, finished };
+}
+
+/** The first scheduled workout earlier this week, since you started, not finished this week. */
+export function missedWorkout(sessions: readonly Session[], date: string): WorkoutId | null {
+  const started = sessions.map((session) => session.date).sort()[0];
+  if (!started) return null;
+  const week = weekFor(date);
+  const done = new Set(
+    sessions
+      .filter((session) => session.status === 'completed' && week.includes(session.date))
+      .map((session) => session.workoutId),
+  );
+  return (
+    week
+      .filter((day) => day >= started && day < date)
+      .map(workoutForDate)
+      .find((id) => id !== null && !done.has(id)) ?? null
+  );
 }
 
 /** Progress counts whole exercises: one is done once all its sets are logged. */

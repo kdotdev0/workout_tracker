@@ -3,7 +3,7 @@ import { useEventListener, useIntervalFn } from '@vueuse/core';
 import { localDate, shiftDate, validDate } from '../domain/dates';
 import { workoutForDate } from '../domain/programme';
 import type { WorkoutId } from '../domain/programme-types';
-import { finishForgotten, isUntouchedSession } from '../domain/sessions';
+import { finishForgotten, isUntouchedSession, missedWorkout } from '../domain/sessions';
 import { workouts as programme } from '../domain/programme';
 import type { AppState, Session } from '../domain/state';
 import { usePushups } from './usePushups';
@@ -67,6 +67,13 @@ export function useTrainingApp() {
     ).length;
     // Two weeks on the calendar and about that much actual training.
     return first !== undefined && today.value >= shiftDate(first, 14) && finished >= 6;
+  });
+  // Today only, before anything is logged: offer a workout skipped earlier this week.
+  const missed = computed(() => {
+    if (date.value !== today.value) return null;
+    if (state.value.sessions.some((session) => session.date === date.value)) return null;
+    const id = missedWorkout(state.value.sessions, date.value);
+    return id === workoutId.value ? null : id;
   });
   let hideMessage: ReturnType<typeof setTimeout> | undefined;
   /** Shows a short confirmation toast that hides itself. */
@@ -167,6 +174,7 @@ export function useTrainingApp() {
     doneDates,
     currentSession,
     readyForBaseline,
+    missed,
     message,
     dismissMessage,
     changeDate,

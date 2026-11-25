@@ -9,6 +9,7 @@ import {
   finishSession,
   finishForgotten,
   improvedExercises,
+  missedWorkout,
   nextTarget,
   previousPerformance,
   recordSet,
@@ -498,5 +499,17 @@ describe('forgotten and missed workouts', () => {
       completedAt: '2026-11-16T18:00:00.000Z',
     });
     expect(late.sessions[1]).toBe(empty);
+  });
+
+  it('offers the first workout skipped earlier this week, counting only since you started', () => {
+    const upperA = finishSession(logged('upperA', '2026-11-16', '2026-11-16T18:00:00.000Z'));
+    expect(missedWorkout([], '2026-11-18')).toBeNull();
+    expect(missedWorkout([upperA], '2026-11-18')).toBe('lowerA');
+    // Done on a rest day still counts for the week.
+    const lowerA = finishSession(logged('lowerA', '2026-11-18', '2026-11-18T18:00:00.000Z'));
+    expect(missedWorkout([upperA, lowerA], '2026-11-19')).toBeNull();
+    // Started on Wednesday: Monday and Tuesday were before the app.
+    const upperB = finishSession(logged('upperB', '2026-11-25', '2026-11-25T18:00:00.000Z'));
+    expect(missedWorkout([upperB], '2026-11-26')).toBeNull();
   });
 });

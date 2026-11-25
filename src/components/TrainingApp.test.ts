@@ -643,6 +643,30 @@ describe('working app integration', () => {
     expect(wrapper.text()).toContain('Settings & data');
   });
 
+  it('offers a workout missed earlier this week and switches to it in one tap', async () => {
+    const upperA = startSession('upperA', '2026-11-16', 'intro');
+    const done = finishSession(
+      recordSet(upperA, upperA.exercises[0]!.exercise.id, {
+        index: 1,
+        load: 20,
+        reps: 6,
+        effort: 3,
+        loggedAt: '2026-11-16T18:00:00.000Z',
+      }),
+    );
+    const database = await openDB(databaseName, 1, {
+      upgrade: (entry) => entry.createObjectStore('records'),
+    });
+    await database.put('records', { ...emptyState(), sessions: [done] }, 'state');
+    database.close();
+    vi.setSystemTime(new Date(2026, 10, 18, 9)); // Wednesday, rest day; Tuesday's Lower A skipped
+    const wrapper = await app();
+    expect(wrapper.text()).toContain('You missed Lower A this week.');
+    await button(wrapper, 'Do it today').trigger('click');
+    expect(wrapper.text()).not.toContain('You missed');
+    expect(wrapper.get('h2.workout-title').text()).toBe('Lower A');
+  });
+
   it('does not start a rest timer after the last set of the workout', async () => {
     const session = startSession('upperA', '2026-11-16', 'intro');
     const [last, ...rest] = [...session.exercises].reverse();

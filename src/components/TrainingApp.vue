@@ -104,6 +104,7 @@ async function recordPushups(day: string, reps: number, onSaved?: () => void) {
           :workout-id="app.workoutId.value"
           :phase="state.settings.phase"
           :ready-for-baseline="app.readyForBaseline.value"
+          :missed="app.missed.value"
           :rest-minutes="state.settings.restMinutes"
           :session="app.draft.value"
           :completed="app.completed.value"
