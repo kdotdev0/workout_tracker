@@ -61,7 +61,11 @@ export function useTrainingApp() {
       .filter((session) => session.phase === 'intro')
       .map((session) => session.date)
       .sort()[0];
-    return first !== undefined && today.value >= shiftDate(first, 14);
+    const finished = state.value.sessions.filter(
+      (session) => session.phase === 'intro' && session.status === 'completed',
+    ).length;
+    // Two weeks on the calendar and about that much actual training.
+    return first !== undefined && today.value >= shiftDate(first, 14) && finished >= 6;
   });
   let hideMessage: ReturnType<typeof setTimeout> | undefined;
   /** Shows a short confirmation toast that hides itself. */

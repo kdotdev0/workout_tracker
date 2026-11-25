@@ -591,28 +591,46 @@ describe('working app integration', () => {
     expect(wrapper.get('main h1').text()).toBe('UNICA lat pulldown');
   });
 
-  it('suggests full baseline after two weeks of introduction', async () => {
-    const database = await openDB(databaseName, 1, {
-      upgrade: (entry) => entry.createObjectStore('records'),
+  it('suggests full baseline after two weeks and six finished introduction workouts', async () => {
+    const days = [
+      '2026-11-02',
+      '2026-11-03',
+      '2026-11-05',
+      '2026-11-06',
+      '2026-11-09',
+      '2026-11-10',
+    ];
+    const ids = ['upperA', 'lowerA', 'upperB', 'lowerB'] as const;
+    const done = days.map((day, index) => {
+      const session = startSession(ids[index % 4]!, day, 'intro');
+      return finishSession(
+        recordSet(session, session.exercises[0]!.exercise.id, {
+          index: 1,
+          load: 20,
+          reps: 6,
+          effort: 3,
+          loggedAt: `${day}T18:00:00.000Z`,
+        }),
+      );
     });
-    const first = startSession('upperA', '2026-11-02', 'intro');
-    const done = finishSession(
-      recordSet(first, first.exercises[0]!.exercise.id, {
-        index: 1,
-        load: 20,
-        reps: 6,
-        effort: 3,
-        loggedAt: new Date().toISOString(),
-      }),
-    );
-    await database.put('records', { ...emptyState(), sessions: [done] }, 'state');
-    database.close();
+    async function open(sessions: typeof done) {
+      const database = await openDB(databaseName, 1, {
+        upgrade: (entry) => entry.createObjectStore('records'),
+      });
+      await database.put('records', { ...emptyState(), sessions }, 'state');
+      database.close();
+      return app();
+    }
+    vi.setSystemTime(new Date(2026, 10, 17, 9));
+    // Two weeks on the calendar, but only five workouts.
+    const short = await open(done.slice(0, 5));
+    expect(short.text()).not.toContain('Two weeks of introduction done');
+    short.unmount();
+    wrappers.splice(0);
     vi.setSystemTime(new Date(2026, 10, 12, 9));
-    const wrapper = mount(TrainingApp);
-    wrappers.push(wrapper);
-    await vi.waitFor(() => expect(wrapper.text()).toContain('On-device storage ready'));
+    const wrapper = await open(done);
     expect(wrapper.text()).not.toContain('Two weeks of introduction done');
-    vi.setSystemTime(new Date(2026, 10, 16, 9));
+    vi.setSystemTime(new Date(2026, 10, 17, 9));
     document.dispatchEvent(new Event('visibilitychange'));
     await vi.waitFor(() => expect(wrapper.text()).toContain('Two weeks of introduction done'));
     await button(wrapper, 'Switch to Full baseline').trigger('click');
