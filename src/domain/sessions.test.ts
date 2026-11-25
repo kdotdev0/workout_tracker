@@ -7,6 +7,7 @@ import {
   bestSet,
   alternativeOf,
   finishSession,
+  finishForgotten,
   improvedExercises,
   nextTarget,
   previousPerformance,
@@ -476,5 +477,26 @@ describe('backup validation', () => {
     expect(shortSet({ ...log, load: null })).toBe('L 10 / R 9');
     expect(() => recordSet(session, sided.exercise.id, { ...log, reps: 10 })).toThrow();
     expect(() => recordSet(session, bilateral.exercise.id, log)).toThrow();
+  });
+});
+
+describe('forgotten and missed workouts', () => {
+  function logged(workoutId: WorkoutId, date: string, at: string) {
+    const session = startSession(workoutId, date, 'intro');
+    return recordSet(session, session.exercises[0]!.exercise.id, { ...set(), loggedAt: at });
+  }
+
+  it('finishes an open workout at its last set once 6 hours pass, never an empty one', () => {
+    const open = logged('upperA', '2026-11-16', '2026-11-16T18:00:00.000Z');
+    const empty = startSession('lowerA', '2026-11-17', 'intro');
+    const early = finishForgotten([open, empty], Date.parse('2026-11-16T23:00:00.000Z'));
+    expect(early.finished).toEqual([]);
+    const late = finishForgotten([open, empty], Date.parse('2026-11-17T01:00:00.000Z'));
+    expect(late.finished.map((session) => session.id)).toEqual([open.id]);
+    expect(late.sessions[0]).toMatchObject({
+      status: 'completed',
+      completedAt: '2026-11-16T18:00:00.000Z',
+    });
+    expect(late.sessions[1]).toBe(empty);
   });
 });

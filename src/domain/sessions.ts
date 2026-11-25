@@ -132,15 +132,34 @@ export function swapExercise(session: Session, exerciseId: string): Session {
   });
 }
 
-export function finishSession(session: Session): Session {
+export function finishSession(session: Session, completedAt = new Date().toISOString()): Session {
   if (!session.exercises.some((entry) => entry.logs.length > 0)) {
     throw new Error('Record at least one set before completing a workout.');
   }
   return sessionSchema.parse({
     ...session,
     status: 'completed',
-    completedAt: new Date().toISOString(),
+    completedAt,
   });
+}
+
+const FORGOTTEN_MS = 6 * 60 * 60 * 1000;
+
+/** Workouts left open with sets logged but nothing new for 6 hours, finished at their last set. */
+export function finishForgotten(sessions: readonly Session[], now = Date.now()) {
+  const finished: Session[] = [];
+  const next = sessions.map((session) => {
+    if (session.status !== 'active') return session;
+    const last = session.exercises
+      .flatMap((entry) => entry.logs.map((log) => log.loggedAt))
+      .sort()
+      .at(-1);
+    if (!last || now - Date.parse(last) < FORGOTTEN_MS) return session;
+    const done = finishSession(session, last);
+    finished.push(done);
+    return done;
+  });
+  return { sessions: next, finished };
 }
 
 /** Progress counts whole exercises: one is done once all its sets are logged. */

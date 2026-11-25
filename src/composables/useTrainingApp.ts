@@ -3,7 +3,8 @@ import { useEventListener, useIntervalFn } from '@vueuse/core';
 import { localDate, shiftDate, validDate } from '../domain/dates';
 import { workoutForDate } from '../domain/programme';
 import type { WorkoutId } from '../domain/programme-types';
-import { isUntouchedSession } from '../domain/sessions';
+import { finishForgotten, isUntouchedSession } from '../domain/sessions';
+import { workouts as programme } from '../domain/programme';
 import type { AppState, Session } from '../domain/state';
 import { usePushups } from './usePushups';
 import { useRestTimer } from './useRestTimer';
@@ -105,7 +106,14 @@ export function useTrainingApp() {
   useEventListener(document, 'visibilitychange', refreshCalendarDay);
   useIntervalFn(refreshCalendarDay, 30_000);
 
-  onMounted(store.load);
+  onMounted(async () => {
+    await store.load();
+    const { sessions, finished } = finishForgotten(state.value.sessions);
+    if (finished.length && (await update((current) => ({ ...current, sessions }))))
+      notify(
+        `Finished ${finished.map((session) => programme[session.workoutId].name).join(', ')} you left open.`,
+      );
+  });
   onUnmounted(() => clearTimeout(hideMessage));
   watch(view, () => {
     dismissMessage();

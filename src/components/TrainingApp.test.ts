@@ -105,19 +105,25 @@ describe('working app integration', () => {
     });
     await database.put('records', { ...emptyState(), sessions }, 'state');
     database.close();
-    const wrapper = await app();
+    const wrapper = mount(TrainingApp);
+    wrappers.push(wrapper);
+    // The 13 November workout was left open a week ago: it is finished at its last set, logs intact.
+    await vi.waitFor(() => expect(wrapper.text()).toContain('Finished Lower B you left open.'));
     await wrapper.get('input[type="date"]').setValue('2026-11-13');
     expect(wrapper.text()).toContain('Barbell deadlift');
-    await button(wrapper, 'Resume workout').trigger('click');
-    await vi.waitFor(() => expect(wrapper.get('main h1').text()).toBe('Barbell deadlift'));
-    await button(wrapper, 'Back to plan').trigger('click');
+    expect(wrapper.text()).toContain('View in history');
     await wrapper.get('input[type="date"]').setValue('2026-11-20');
     await button(wrapper, 'Start workout').trigger('click');
     await vi.waitFor(() => expect(wrapper.get('main h1').text()).toBe('Barbell Romanian deadlift'));
     // Focus mode: no tab bar mid-workout.
     expect(wrapper.find('nav[aria-label="Main navigation"]').exists()).toBe(false);
     const saved = await savedData();
-    expect(saved.sessions.slice(0, 2)).toEqual(sessions);
+    expect(saved.sessions[0]).toEqual(sessions[0]);
+    expect(saved.sessions[1]).toEqual({
+      ...sessions[1],
+      status: 'completed',
+      completedAt: '2026-11-13T10:05:00.000Z',
+    });
     expect(saved.settings.phase).toBe('intro');
     expect(saved.sessions.at(-1)!.exercises.at(-1)!.exercise.id).toBe('dip-station-knee-raise');
   });
