@@ -1122,6 +1122,99 @@
           "changes": "Rasterized on a transparent 512 × 512 canvas, recolored for monochrome display, and vector-traced."
         }
       }
+    },
+    {
+      "id": "exercise-reverse-curl",
+      "slug": "reverse-curl",
+      "name": "Reverse Curl",
+      "exerciseType": "weight_reps",
+      "equipment": "Barbell",
+      "primaryMuscle": "Forearms",
+      "secondaryMuscles": ["Biceps"],
+      "isStretch": false,
+      "frames": [
+        {
+          "index": 1,
+          "path": "assets/reverse-curl/frame-1.svg",
+          "width": 512,
+          "height": 512,
+          "format": "svg",
+          "attribution": {
+            "creator": "Bryl Lim",
+            "creatorUrl": "https://bryllim.com",
+            "license": "CC BY-SA 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
+          }
+        }
+      ],
+      "attribution": {
+        "creator": "Bryl Lim",
+        "creatorUrl": "https://bryllim.com",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "id": "exercise-wrist-curl",
+      "slug": "wrist-curl",
+      "name": "Wrist Curl",
+      "exerciseType": "weight_reps",
+      "equipment": "Barbell",
+      "primaryMuscle": "Forearms",
+      "secondaryMuscles": [],
+      "isStretch": false,
+      "frames": [
+        {
+          "index": 1,
+          "path": "assets/wrist-curl/frame-1.svg",
+          "width": 512,
+          "height": 512,
+          "format": "svg",
+          "attribution": {
+            "creator": "Bryl Lim",
+            "creatorUrl": "https://bryllim.com",
+            "license": "CC BY-SA 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
+          }
+        }
+      ],
+      "attribution": {
+        "creator": "Bryl Lim",
+        "creatorUrl": "https://bryllim.com",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "id": "exercise-wrist-extension",
+      "slug": "wrist-extension",
+      "name": "Wrist Extension",
+      "exerciseType": "weight_reps",
+      "equipment": "Dumbbell",
+      "primaryMuscle": "Forearms",
+      "secondaryMuscles": [],
+      "isStretch": false,
+      "frames": [
+        {
+          "index": 1,
+          "path": "assets/wrist-extension/frame-1.svg",
+          "width": 512,
+          "height": 512,
+          "format": "svg",
+          "attribution": {
+            "creator": "Bryl Lim",
+            "creatorUrl": "https://bryllim.com",
+            "license": "CC BY-SA 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
+          }
+        }
+      ],
+      "attribution": {
+        "creator": "Bryl Lim",
+        "creatorUrl": "https://bryllim.com",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
     }
   ]
 }

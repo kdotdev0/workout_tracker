@@ -14,7 +14,10 @@ export type MotionKind =
   | 'cable-fly'
   | 'landmine-row'
   | 'pallof'
-  | 'seated-calf';
+  | 'seated-calf'
+  | 'wrist-curl'
+  | 'reverse-wrist-curl'
+  | 'reverse-curl';
 
 export type Point = readonly [number, number];
 interface Line {
@@ -60,6 +63,9 @@ export const motionKinds: MotionKind[] = [
   'landmine-row',
   'pallof',
   'seated-calf',
+  'wrist-curl',
+  'reverse-wrist-curl',
+  'reverse-curl',
 ];
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 const at = (p: Point, length: number, angle: number): Point => [
@@ -323,6 +329,31 @@ export function motionFrame(kind: MotionKind, phase: number): MotionFrame {
     pad(137, 119, 46, 7);
     rail([144, 126], [144, 178]);
     rail([176, 126], [176, 178]);
+  } else if (kind === 'wrist-curl' || kind === 'reverse-wrist-curl') {
+    const reverse = kind === 'reverse-wrist-curl';
+    frame.cue = reverse
+      ? 'Forearms stay on the thighs; lift the backs of the hands.'
+      : 'Forearms stay on the thighs; curl the palms up.';
+    seated([150, 137], [166, 90], [176, 69]);
+    const elbow: Point = [162, 127],
+      wrist: Point = [196, 127];
+    line([166, 90], elbow);
+    line(elbow, wrist);
+    // Hinge at the wrist only: down toward the floor, then up past level.
+    const hand = at(wrist, 18, reverse ? lerp(65, -35, t) : lerp(55, -50, t));
+    line(wrist, hand, 'active', 7);
+    db(hand);
+  } else if (kind === 'reverse-curl') {
+    frame.cue = 'Palms down, elbows by your sides; wrists stay straight.';
+    const hip: Point = [160, 120],
+      shoulder: Point = [162, 68];
+    torso(hip, shoulder, [163, 47]);
+    leg(hip, [158, 148], [156, 174], [168, 178], 'muted');
+    const elbow = shift(shoulder, 2, 32),
+      hand = at(elbow, 30, lerp(88, -45, t));
+    line(shoulder, elbow);
+    line(elbow, hand, 'active');
+    db(hand);
   } else {
     const impossible: never = kind;
     throw new Error(`Unknown movement diagram: ${impossible}`);
