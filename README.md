@@ -9,7 +9,7 @@ Live: https://kdotdev0.github.io/workout_tracker/
 - Shows the scheduled workout for each day and lets you move through the week.
 - Logs working sets (load, reps or seconds, reps in reserve) and shows your previous performance for each exercise.
 - Runs a rest timer below the set form, with adjustment and dismissal controls. It survives reloads and backgrounding. Rest follows the programme per exercise, or a fixed time you pick in Settings.
-- Shows non-YouTube footage or movement animations for every current exercise and swap, with matching previews, muscle maps and form checks.
+- Shows real-human gym video demonstrations for every current exercise and swap (local Your Move and Goulart / wger clips, plus verified Vimeo and privacy-enhanced YouTube embeds), with matching previews, muscle maps and form checks.
 - Tracks whey and creatine intake.
 - Tracks daily push-ups against a target (100 by default): quick-add buttons, streaks and a month calendar. Tap a calendar day to log or review it, including missed days; the logging card shows the full selected date.
 - Exports and restores all data as a JSON backup.
@@ -69,7 +69,7 @@ Every push to `main` runs `.github/workflows/check.yml`. The `deploy.yml` workfl
 
 - Muscle maps: [wger](https://wger.de), CC BY-SA 4.0, with colours changed. See `public/muscles/LICENSE.txt`.
 - Exercise illustrations: [Workout Guide](https://github.com/bryllim/workout-guide) / [Everkinetic](https://github.com/everkinetic/data), CC BY-SA 4.0. See `public/exercises/ATTRIBUTION.md`.
-- Exercise demonstrations: 41 movement mappings cover all 18 primary exercises, 14 additional current swaps and 9 additional historical guides. Selected sources are 18 local clips (Your Move free collection and CC BY-SA Goulart / wger), four verified Vimeo clips and 16 original movement diagrams. Previews use the matching clip poster or the same diagram’s starting position. Animations pause when hidden, offer pause/restart and use step-through positions for reduced motion. There is no YouTube player. See `public/demos/ATTRIBUTION.md` and `docs/SHORT-DEMO-AUDIT.md` for sources and checks. Footage needs internet and starts after a tap; installed diagrams work without external media.
+- Exercise demonstrations: real-human gym videos cover every current primary exercise, swap and retained historical guide: 24 bundled local clips (Your Move free collection and CC BY-SA Goulart / wger), seven verified Vimeo clips and eight tap-to-play privacy-enhanced YouTube embeds. Previews use the matching clip poster. See `public/demos/ATTRIBUTION.md` and `docs/SHORT-DEMO-AUDIT.md` for sources and checks. Videos need internet and start after a tap.
 - Fonts: Geist and Bricolage Grotesque, OFL.
 
 No licence has been chosen for the app's source code. The third-party assets keep their own licences.

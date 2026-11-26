@@ -1,19 +1,23 @@
 # Exercise demonstration credits
 
-Revised 14 November 2026. Source-code rights do not replace the rights attached to external media.
+Revised 26 November 2026. Source-code rights do not replace the rights attached to external media.
 
-## Your Move: four bundled app demonstrations
+## Your Move: eight bundled app demonstrations
 
-Videos by [Your Move](https://ymove.app), used under the [published free collection terms](https://github.com/ymove-app/exercise-api/blob/main/free-videos/README.md). Those terms permit app/website use and downloading, including commercial use, without signup. Attribution is appreciated; resale or redistribution as a standalone video library is prohibited. These four clips are incorporated into this workout app. No Creative Commons licence is asserted.
+Videos by [Your Move](https://ymove.app), used under the [published free collection terms](https://github.com/ymove-app/exercise-api/blob/main/free-videos/README.md). Those terms permit app/website use and downloading, including commercial use, without signup. Attribution is appreciated; resale or redistribution as a standalone video library is prohibited. These eight clips are incorporated into this workout app. No Creative Commons licence is asserted.
 
-Adaptations: H.264, 720-pixel coded height, 30 fps, original framing, no audio/extra streams, fast-start MP4. Bench/squat retain approximately 14.8/14 seconds. Deadlift/lateral raise use the first 20 seconds. Every JPEG poster is taken from one second into its output clip.
+Adaptations: H.264, 720-pixel coded height, 30 fps, original framing, no audio/extra streams, fast-start MP4, up to 20 seconds. Every JPEG poster is taken from one second into its output clip.
 
-| File (and matching .jpg poster) | Original                                                                  |
-| ------------------------------- | ------------------------------------------------------------------------- |
-| barbell-bench-press.mp4         | [Source](https://ymove.app/api/free/dd7e706c-2086-4f4b-867f-d7fece2f720d) |
-| barbell-back-squat.mp4          | [Source](https://ymove.app/api/free/fd0eaa34-d14b-4421-b41c-1669f93253b3) |
-| barbell-deadlift.mp4            | [Source](https://ymove.app/api/free/b59952ca-1551-4c07-835d-ab78bfe9953c) |
-| dumbbell-lateral-raise.mp4      | [Source](https://ymove.app/api/free/a16f0235-20eb-4306-b9cc-c01ae51b3b9b) |
+| File (and matching .jpg poster) | Original                                                                                                          |
+| ------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| barbell-bench-press.mp4         | [Source](https://ymove.app/api/free/dd7e706c-2086-4f4b-867f-d7fece2f720d)                                         |
+| barbell-back-squat.mp4          | [Source](https://ymove.app/api/free/fd0eaa34-d14b-4421-b41c-1669f93253b3)                                         |
+| barbell-deadlift.mp4            | [Source](https://ymove.app/api/free/b59952ca-1551-4c07-835d-ab78bfe9953c)                                         |
+| dumbbell-lateral-raise.mp4      | [Source](https://ymove.app/api/free/a16f0235-20eb-4306-b9cc-c01ae51b3b9b)                                         |
+| lat-pulldown.mp4                | [Source](https://github.com/ymove-app/exercise-api/blob/main/free-videos/lat-pulldown.mp4)                        |
+| seated-cable-row.mp4            | [Source](https://github.com/ymove-app/exercise-api/blob/main/free-videos/seated-cable-row-close-v-bar-bccf4f.mp4) |
+| leg-extension.mp4               | [Source](https://github.com/ymove-app/exercise-api/blob/main/free-videos/leg-extension.mp4)                       |
+| cable-crossover-mid.mp4         | [Source](https://github.com/ymove-app/exercise-api/blob/main/free-videos/cable-crossover-mid-b24dfe.mp4)          |
 
 SHA-256 of adapted MP4s:
 
@@ -22,6 +26,10 @@ d3c67eabe173a37c143d5c6fb9386163edaab6afbecaa175f88647eca94434ad  barbell-bench-
 aefd336ba13bb77c1e6001339bf80fcdd3199a0da9af38d4133ac0fd5a6156cd  barbell-back-squat.mp4
 2e30c08bed48bd7b1f452cbec847ce5f3d0fe334bf9faf10c7760a25a931bf26  barbell-deadlift.mp4
 f6c5807252503277ff9ef05c173ef3a9207ff6c6fe1353c369087b02a19e2210  dumbbell-lateral-raise.mp4
+d3f9d917e28dcedb011d75b80f1c2f5cb8e499500ad4d09c2275d71530d05c88  lat-pulldown.mp4
+b4fc016fe9f5c860957c0963fa625d7e40875f075d9c8f0a78ce34d5b2b3115f  seated-cable-row.mp4
+eb1e735610b3b71f7601e5f19818e33713fd463427e1b8789960c73e188e97ac  leg-extension.mp4
+323f314a62c32744b712f1a19a91d048940c2139f24ce8874d9b90d45be56b22  cable-crossover-mid.mp4
 ```
 
 ## Goulart / wger: bundled adaptations, CC BY-SA 4.0
@@ -85,19 +93,33 @@ e40d723d9570bf01e02fb2a54a4ee1202d1a451e164ac8702ea3d32aa70866e7  smith-squat.mp
 
 ## Creator-hosted Vimeo embeds
 
-The following four videos and their owner-published posters are served by Vimeo, not copied into this repository or deployment artifact. The [oEmbed API](https://developer.vimeo.com/api/oembed/videos) supplied public embed markup and matching title/author/poster metadata. Each iframe was checked for actual playback in isolated local Chrome. Embedding does not transfer ownership or a Creative Commons licence. Credits link to the original source. Creator-hosted availability and Vimeo privacy rules apply.
+The following seven videos and their owner-published posters are served by Vimeo, not copied into this repository or deployment artifact. The [oEmbed API](https://developer.vimeo.com/api/oembed/videos) supplied public embed metadata and matching title/author/poster records, and each player endpoint was verified publicly embeddable. Embedding does not transfer ownership or a Creative Commons licence. Credits link to the original source. Creator-hosted availability and Vimeo privacy rules apply.
 
-| Creator                          | Video                               | Source                                   |
-| -------------------------------- | ----------------------------------- | ---------------------------------------- |
-| Anthony Matlock                  | Tutorial: Smith Machine Bench Press | [Original](https://vimeo.com/223935810)  |
-| Strong Body Strong Mind          | Single Arm Dumbbell Row             | [Original](https://vimeo.com/363596447)  |
-| ActionJax Strength & Performance | Barbell Romanian Deadlift           | [Original](https://vimeo.com/1000189819) |
-| ActionJax Strength & Performance | Hanging Knee Raise                  | [Original](https://vimeo.com/1130705496) |
+| Creator                          | Video                                 | Source                                   |
+| -------------------------------- | ------------------------------------- | ---------------------------------------- |
+| Anthony Matlock                  | Tutorial: Smith Machine Bench Press   | [Original](https://vimeo.com/223935810)  |
+| Anthony Matlock                  | Tutorial: Peck Deck Fly               | [Original](https://vimeo.com/223935831)  |
+| Anthony Matlock                  | Tutorial: Reverse Machine Fly         | [Original](https://vimeo.com/223935802)  |
+| Anthony Matlock                  | Tutorial: Barbell Incline Bench Press | [Original](https://vimeo.com/223933646)  |
+| Strong Body Strong Mind          | Single Arm Dumbbell Row               | [Original](https://vimeo.com/363596447)  |
+| ActionJax Strength & Performance | Barbell Romanian Deadlift             | [Original](https://vimeo.com/1000189819) |
+| ActionJax Strength & Performance | Hanging Knee Raise                    | [Original](https://vimeo.com/1130705496) |
 
-## Original movement diagrams
+## Creator-hosted YouTube embeds (privacy-enhanced)
 
-The labelled vector movement diagrams are original app source in src/domain/exercise-motion.ts and src/components/ExerciseMotion.vue. No external footage, third-party animation library or generated photoreal body video is used. The same model provides the preview and animated/step-through positions. Diagrams illustrate direction and support points, with machine-specific settings left to the exercise's form cues. They do not claim to be motion capture, exact anatomical measurements or a prescribed repetition tempo.
+Where no free local clip or publicly embeddable Vimeo clip exists, the app embeds creator-hosted YouTube demonstrations via `youtube-nocookie.com` only after a user tap. Thumbnails are the matching `i.ytimg.com` posters for each exact video ID. Embedding does not transfer ownership or a Creative Commons licence. Credits link to the original source, and YouTube's availability and privacy rules apply.
+
+| Creator                   | Video                                         | Source                                                  |
+| ------------------------- | --------------------------------------------- | ------------------------------------------------------- |
+| Renaissance Periodization | Incline Dumbbell Curl                         | [Original](https://www.youtube.com/watch?v=aTYlqC_JacQ) |
+| My PT Hub                 | Seated Dumbbell Palms-Up Wrist Curl           | [Original](https://www.youtube.com/watch?v=3rsKOL8scsU) |
+| Renaissance Periodization | Cable Wrist Curl                              | [Original](https://www.youtube.com/watch?v=WVAaKJvToe0) |
+| Ellipse Athletics         | Dumbbell Reverse Wrist Curl                   | [Original](https://www.youtube.com/watch?v=osYPwlBiCRM) |
+| OPEX Fitness              | Dumbbell Reverse Curl - OPEX Exercise Library | [Original](https://www.youtube.com/watch?v=hUA-fIpM7nA) |
+| PureGym                   | How To Do A Reverse Crunch                    | [Original](https://www.youtube.com/watch?v=XY8KzdDcMFg) |
+| Horton Barbell            | Landmine T-Bar Row (How To & Coaching Points) | [Original](https://www.youtube.com/watch?v=EyA_ym9Ksaw) |
+| FIT.nl                    | Cable Pallof Press                            | [Original](https://www.youtube.com/watch?v=xeFp4MXad98) |
 
 ## Selection notes
 
-The barbell RDL uses a barbell reference. Machine flies, supported split squats, incline curls, floor reverse crunches and other gaps use movement-specific diagrams. Retained clips preserve explicit missing-pause, machine-model and setup qualifications. Two older unused calf clips stay attributed for rollback. Training prescriptions and saved history are unchanged.
+Every movement uses real human gym footage; all earlier vector stick-figure movement animations were removed on 26 November 2026 at the user's request. Clips that show a different machine model or setup carry explicit variation notes beside the demonstration. Training prescriptions and saved history are unchanged.

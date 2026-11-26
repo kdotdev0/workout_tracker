@@ -3,7 +3,7 @@ import { computed, nextTick, shallowRef, useTemplateRef } from 'vue';
 import { ArrowLeft, BellRing, ChevronLeft, ChevronRight, Timer, TrendingUp } from '@lucide/vue';
 import { useIntersectionObserver } from '@vueuse/core';
 import { formatDate } from '@/domain/dates';
-import { workouts } from '@/domain/programme';
+import { isForearmExercise, workouts } from '@/domain/programme';
 import { improvedExercises, isExerciseComplete, sessionProgress } from '@/domain/sessions';
 import type { Session, SetLog } from '@/domain/state';
 import { Button } from '@/components/ui/button';
@@ -89,7 +89,8 @@ async function selectExercise(index: number) {
     <div class="flex flex-col gap-2">
       <div class="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
         <span class="text-muted-foreground text-xs"
-          >Exercise {{ selected + 1 }} of {{ session.exercises.length }}</span
+          >Exercise {{ selected + 1 }} of {{ session.exercises.length
+          }}<template v-if="isForearmExercise(entry.exercise)"> · Forearms</template></span
         >
         <span class="text-xs font-medium whitespace-nowrap tabular-nums"
           >{{ progress.done }}/{{ progress.total }} exercises done</span

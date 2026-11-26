@@ -4,7 +4,6 @@ import { useEventListener } from '@vueuse/core';
 import { Info, Play, RotateCcw, X } from '@lucide/vue';
 import { Button } from '@/components/ui/button';
 import type { ExerciseDemo } from '@/domain/demos';
-import ExerciseMotion from './ExerciseMotion.vue';
 
 const props = defineProps<{ demo: ExerciseDemo; exerciseId: string; exerciseName: string }>();
 const root = useTemplateRef<HTMLElement>('root');
@@ -16,19 +15,28 @@ const disclosure = computed(() => root.value?.closest('details') ?? null);
 const duration = computed(() => Math.ceil(props.demo.durationSeconds));
 const source = computed(() => {
   if (props.demo.kind === 'file') return mediaUrl(props.demo.src);
-  if (props.demo.kind === 'animation') return undefined;
+  if (props.demo.kind === 'vimeo') {
+    const params = new URLSearchParams({
+      autoplay: '1',
+      muted: '1',
+      loop: '1',
+      playsinline: '1',
+      dnt: '1',
+    });
+    return `https://player.vimeo.com/video/${props.demo.videoId}?${params}`;
+  }
   const params = new URLSearchParams({
     autoplay: '1',
-    muted: '1',
+    mute: '1',
     loop: '1',
+    playlist: props.demo.videoId,
     playsinline: '1',
-    dnt: '1',
+    rel: '0',
   });
-  return `https://player.vimeo.com/video/${props.demo.videoId}?${params}`;
+  return `https://www.youtube-nocookie.com/embed/${props.demo.videoId}?${params}`;
 });
-const poster = computed(() =>
-  props.demo.kind === 'animation' ? undefined : mediaUrl(props.demo.poster),
-);
+const poster = computed(() => mediaUrl(props.demo.poster));
+const isEmbed = computed(() => props.demo.kind !== 'file');
 
 function mediaUrl(path: string) {
   return path.startsWith('https://') ? path : `${import.meta.env.BASE_URL}${path}`;
@@ -66,9 +74,9 @@ useEventListener(disclosure, 'toggle', () => {
       <Button v-if="watching" type="button" variant="ghost" class="min-h-11" @click="close">
         <X class="size-4" />Close demo
       </Button>
-      <span v-else class="text-muted-foreground text-xs tabular-nums">{{
-        demo.kind === 'animation' ? 'Movement animation' : `${duration} sec · loops`
-      }}</span>
+      <span v-else class="text-muted-foreground text-xs tabular-nums"
+        >{{ duration }} sec · loops</span
+      >
     </div>
 
     <p
@@ -80,15 +88,9 @@ useEventListener(disclosure, 'toggle', () => {
     </p>
 
     <template v-if="watching">
-      <ExerciseMotion
-        v-if="demo.kind === 'animation'"
-        :kind="demo.motion"
-        :label="exerciseName"
-        :playing="true"
-      />
       <!-- Portrait clips sit on a blurred copy of their poster instead of flat side bars. -->
       <div
-        v-else-if="!failed && demo.kind === 'file'"
+        v-if="!failed && demo.kind === 'file'"
         class="bg-secondary relative overflow-hidden rounded-2xl"
       >
         <img :src="poster" alt="" aria-hidden="true" class="demo-backdrop" />
@@ -116,7 +118,7 @@ useEventListener(disclosure, 'toggle', () => {
           width="560"
           height="315"
           referrerpolicy="strict-origin-when-cross-origin"
-          allow="autoplay; fullscreen; picture-in-picture"
+          allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
           allowfullscreen
           @error="failed = true"
         />
@@ -131,13 +133,10 @@ useEventListener(disclosure, 'toggle', () => {
           <RotateCcw class="size-4" />Retry demo
         </Button>
       </div>
-      <p
-        v-if="!failed && demo.kind !== 'animation'"
-        class="text-muted-foreground text-xs leading-5"
-      >
+      <p v-if="!failed" class="text-muted-foreground text-xs leading-5">
         {{ duration }} sec · starts muted · pause or replay with the video controls
       </p>
-      <details v-if="!failed && demo.kind === 'vimeo'" class="text-muted-foreground text-xs">
+      <details v-if="!failed && isEmbed" class="text-muted-foreground text-xs">
         <summary class="flex min-h-11 cursor-pointer items-center font-medium">
           Video not playing?
         </summary>
@@ -153,17 +152,10 @@ useEventListener(disclosure, 'toggle', () => {
       type="button"
       data-quick-demo
       :aria-label="`Play demonstration: ${exerciseName}`"
-      class="group/demo focus-visible:ring-ring/60 relative flex items-center justify-center overflow-hidden rounded-2xl bg-secondary outline-none focus-visible:ring-2"
-      :class="demo.kind === 'animation' ? 'aspect-[8/5]' : 'aspect-video'"
+      class="group/demo focus-visible:ring-ring/60 bg-secondary relative flex aspect-video items-center justify-center overflow-hidden rounded-2xl outline-none focus-visible:ring-2"
       @click="watching = true"
     >
-      <ExerciseMotion
-        v-if="demo.kind === 'animation'"
-        :kind="demo.motion"
-        :label="exerciseName"
-        :playing="false"
-      />
-      <template v-else-if="!posterFailed">
+      <template v-if="!posterFailed">
         <img
           :src="poster"
           alt=""
@@ -190,9 +182,7 @@ useEventListener(disclosure, 'toggle', () => {
         <Play class="ml-0.5 size-6 fill-current" />
       </span>
       <span class="bg-card/95 absolute bottom-2 left-2 rounded-md px-2 py-1 text-xs font-semibold">
-        {{
-          demo.kind === 'animation' ? 'Play movement animation' : `Play ${duration}-second video`
-        }}
+        Play {{ duration }}-second video
       </span>
     </button>
 
@@ -216,7 +206,8 @@ useEventListener(disclosure, 'toggle', () => {
         >
       </template>
       <template v-else-if="demo.kind === 'vimeo'"> · Vimeo</template>
-      <template v-if="demo.kind !== 'animation'"> · needs internet</template>
+      <template v-else> · YouTube</template>
+      · needs internet
     </figcaption>
   </figure>
 </template>

@@ -179,7 +179,7 @@ function save() {
           and then.
         </li>
         <li>No account, analytics or tracking. Nothing is uploaded.</li>
-        <li>Works offline once installed. Videos need internet; movement diagrams work offline.</li>
+        <li>Works offline once installed. Demonstration videos need internet.</li>
       </ul>
       <details>
         <summary class="text-foreground flex min-h-11 items-center py-2 font-semibold">
@@ -201,18 +201,18 @@ function save() {
           highlight colours changed. Modified files are shared under the same licence.
         </p>
         <p class="mt-2">
-          Demonstrations use licensed Your Move and Goulart / wger videos, creator-hosted Vimeo
-          embeds and original movement diagrams. Each preview uses its selected video or diagram.
-          Source credits and any setup differences appear beside the demonstration.
+          Demonstrations use licensed Your Move and Goulart / wger videos, plus creator-hosted Vimeo
+          and privacy-enhanced YouTube embeds where no free local clip exists. Each preview uses its
+          selected video. Source credits and any setup differences appear beside the demonstration.
         </p>
         <a class="text-primary underline underline-offset-4" :href="`${base}demos/ATTRIBUTION.md`">
           Video credits and modifications
         </a>
         <p class="mt-2">
-          Vimeo receives a connection when its poster loads and when you start its player; its
-          privacy rules apply. Videos need internet, start only after a tap and are not saved for
-          offline playback. Creator-hosted embeds retain their own rights; the wger licence does not
-          apply to them.
+          Vimeo or YouTube receives a connection when its poster loads and when you start its
+          player; their privacy rules apply. Videos need internet, start only after a tap and are
+          not saved for offline playback. Creator-hosted embeds retain their own rights; the wger
+          licence does not apply to them.
         </p>
         <a class="text-primary underline underline-offset-4" :href="`${base}muscles/LICENSE.txt`"
           >Read the licence notice</a

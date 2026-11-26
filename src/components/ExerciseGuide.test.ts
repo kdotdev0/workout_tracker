@@ -5,7 +5,7 @@ import { alternativeOf, startSession } from '@/domain/sessions';
 import { workouts } from '@/domain/programme';
 
 describe('alternative exercise guidance', () => {
-  it('provides a non-YouTube player for every prescribed movement and swap', async () => {
+  it('provides a real video player for every prescribed movement and swap', async () => {
     const current = Object.values(workouts).flatMap((workout) => workout.exercises);
     const exercises = new Map(
       current
@@ -16,13 +16,10 @@ describe('alternative exercise guidance', () => {
       const wrapper = mount(ExerciseGuide, { props: { exercise } });
       expect(wrapper.find('[data-quick-demo]').exists(), exercise.id).toBe(true);
       expect(wrapper.text()).not.toContain('not available');
-      expect(wrapper.text()).not.toContain('YouTube');
       expect(wrapper.find('video, iframe').exists()).toBe(false);
       await wrapper.get('[data-quick-demo]').trigger('click');
-      expect(wrapper.find('video, iframe, [data-motion]').exists(), exercise.id).toBe(true);
-      if (wrapper.find('[data-motion]').exists())
-        expect(wrapper.text()).toContain('Pause animation');
-      expect(wrapper.html()).not.toMatch(/youtube|ytimg/i);
+      expect(wrapper.find('video, iframe').exists(), exercise.id).toBe(true);
+      expect(wrapper.find('[data-motion]').exists(), exercise.id).toBe(false);
       wrapper.unmount();
     }
   });

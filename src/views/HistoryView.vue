@@ -4,7 +4,7 @@ import { ChevronDown, Dumbbell } from '@lucide/vue';
 import type { Session } from '@/domain/state';
 import { formatDate } from '@/domain/dates';
 import { formatSet, sessionProgress } from '@/domain/sessions';
-import { workouts } from '@/domain/programme';
+import { isForearmExercise, workouts } from '@/domain/programme';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import ExerciseProgress from '@/components/session/ExerciseProgress.vue';
@@ -96,22 +96,31 @@ const entries = computed(() =>
         {{ session.phase === 'intro' ? 'Introduction' : 'Baseline' }} · recorded prescriptions
         retained
       </p>
-      <div
-        v-for="item in session.exercises"
-        :key="item.exercise.id"
-        class="flex items-start gap-3 text-sm"
-      >
-        <ExerciseIcon :exercise-id="item.exercise.id" class="size-11 shrink-0" />
-        <div class="flex min-w-0 flex-col">
-          <strong class="font-semibold">{{ item.exercise.name }}</strong>
-          <p v-if="!item.logs.length" class="text-muted-foreground">No sets recorded</p>
-          <ol v-else class="text-muted-foreground tabular-nums">
-            <li v-for="log in item.logs" :key="log.index">
-              Set {{ log.index }} · {{ formatSet(log, item.exercise) }}
-            </li>
-          </ol>
+      <template v-for="(item, index) in session.exercises" :key="item.exercise.id">
+        <div
+          v-if="
+            index > 0 &&
+            isForearmExercise(item.exercise) &&
+            !isForearmExercise(session.exercises[index - 1]!.exercise)
+          "
+          class="flex items-center gap-3 pt-1"
+        >
+          <span class="text-muted-foreground text-xs font-medium">Forearms</span>
+          <span class="bg-border/60 h-px flex-1" aria-hidden="true" />
         </div>
-      </div>
+        <div class="flex items-start gap-3 text-sm">
+          <ExerciseIcon :exercise-id="item.exercise.id" class="size-11 shrink-0" />
+          <div class="flex min-w-0 flex-col">
+            <strong class="font-semibold">{{ item.exercise.name }}</strong>
+            <p v-if="!item.logs.length" class="text-muted-foreground">No sets recorded</p>
+            <ol v-else class="text-muted-foreground tabular-nums">
+              <li v-for="log in item.logs" :key="log.index">
+                Set {{ log.index }} · {{ formatSet(log, item.exercise) }}
+              </li>
+            </ol>
+          </div>
+        </div>
+      </template>
       <Button v-if="session.status === 'active'" @click="emit('resume', session.id)"
         >Resume this workout</Button
       >

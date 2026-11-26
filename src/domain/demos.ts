@@ -1,5 +1,5 @@
 import vimeoSources from './vimeo-sources.json';
-import type { MotionKind } from './exercise-motion';
+import youtubeSources from './youtube-sources.json';
 
 interface DemoMedia {
   durationSeconds: number;
@@ -17,7 +17,7 @@ type VideoMedia = DemoMedia &
         licenceUrl: string;
       }
     | { kind: 'vimeo'; videoId: string; poster: string }
-    | { kind: 'animation'; motion: MotionKind }
+    | { kind: 'youtube'; videoId: string; poster: string }
   );
 
 export type ExerciseDemo = VideoMedia &
@@ -36,14 +36,16 @@ function vimeo(videoId: keyof typeof vimeoSources): VideoMedia {
   };
 }
 
-/** Original, labelled movement diagrams share exactly the same model for preview and playback. */
-function animation(motion: MotionKind): VideoMedia {
+/** Privacy-enhanced YouTube embeds load only after a tap; poster matches the video ID. */
+function youtube(videoId: keyof typeof youtubeSources): VideoMedia {
+  const source = youtubeSources[videoId];
   return {
-    kind: 'animation',
-    motion,
-    durationSeconds: 5,
-    credit: 'Movement diagram · Steady',
-    creditUrl: 'https://github.com/kdotdev0/workout_tracker',
+    kind: 'youtube',
+    videoId,
+    poster: source.poster,
+    durationSeconds: source.durationSeconds,
+    credit: `${source.author} · ${source.title}`,
+    creditUrl: source.sourceUrl,
   };
 }
 
@@ -101,6 +103,36 @@ const fileDemos: Readonly<Record<string, ExerciseDemo>> = {
   'db-lateral-raise': {
     ...file('dumbbell-lateral-raise', 20, yourMove),
     match: 'movement',
+  },
+  'unica-lat-pulldown': {
+    ...file('lat-pulldown', 18.27, yourMove),
+    match: 'related',
+    difference:
+      'A standard cable pulldown station is shown. Use the UNICA lat bar on the high hook and its seat/thigh setup.',
+  },
+  'unica-seated-row': {
+    ...file('seated-cable-row', 8.23, yourMove),
+    match: 'related',
+    difference:
+      'A V-handle cable row is shown. Use the UNICA supported seated-row long bars with your torso against the pad.',
+  },
+  'selection-leg-extension': {
+    ...file('leg-extension', 18.53, yourMove),
+    match: 'related',
+    difference:
+      'A plate-loaded leg-extension machine is shown. Use your Selection 700 knee-pivot, seat and ankle-pad settings.',
+  },
+  'unica-leg-extension': {
+    ...file('leg-extension', 18.53, yourMove),
+    match: 'related',
+    difference:
+      'A dedicated leg-extension machine is shown. Use the UNICA leg-extension setup in your saved cues.',
+  },
+  'one-arm-standing-cable-fly': {
+    ...file('cable-crossover-mid', 20, yourMove),
+    match: 'related',
+    difference:
+      'Two-arm standing cable fly shown. Perform one arm at a time from a staggered stance without rotating your torso.',
   },
   dips: {
     ...file('dips', 12.75, {
@@ -168,6 +200,16 @@ const fileDemos: Readonly<Record<string, ExerciseDemo>> = {
     }),
     match: 'movement',
   },
+  'supported-db-stationary-split-squat': {
+    ...file('split-squat', 9, {
+      ...wger,
+      creditUrl:
+        'https://wger.de/media/exercise-video/205/4cd5dc48-897f-4e0c-8c5a-639a4098ceb1.MOV',
+    }),
+    match: 'related',
+    difference:
+      'Unsupported two-DB split squat shown. Use one hand lightly on a fixed upright and hold one DB; keep the rear foot on the floor.',
+  },
   'unica-arm-curl': {
     ...file('machine-preacher-curl', 12, {
       ...wger,
@@ -217,16 +259,52 @@ const fileDemos: Readonly<Record<string, ExerciseDemo>> = {
     }),
     match: 'movement',
   },
+  'standing-one-leg-cable-curl': {
+    ...file('seated-leg-curl', 12, {
+      ...wger,
+      creditUrl:
+        'https://wger.de/media/exercise-video/366/43df4b79-d4c3-4fbf-bcb5-e0d825b84120.MOV',
+    }),
+    match: 'related',
+    difference:
+      'A seated machine curl is shown. Stand at the low cable with the ankle strap; the knee-curl path is the same.',
+  },
+  'supported-single-leg-standing-db-calf-raise': {
+    ...file('standing-calf-raise', 12, {
+      ...wger,
+      creditUrl:
+        'https://wger.de/media/exercise-video/622/461171e5-2b16-407d-bf27-27aeef43f105.MOV',
+    }),
+    match: 'related',
+    difference:
+      'Two-leg step calf raise shown. Do one leg at a time on the floor with one DB, holding a fixed upright lightly for balance.',
+  },
+  'supported-bodyweight-single-leg-calf-raise': {
+    ...file('standing-calf-raise', 12, {
+      ...wger,
+      creditUrl:
+        'https://wger.de/media/exercise-video/622/461171e5-2b16-407d-bf27-27aeef43f105.MOV',
+    }),
+    match: 'related',
+    difference:
+      'Two-leg step calf raise shown. Do one leg at a time on the floor without added load, holding a fixed upright lightly for balance.',
+  },
+  'seated-db-calf-raise': {
+    ...file('seated-calf-raise', 12, {
+      ...wger,
+      creditUrl:
+        'https://wger.de/media/exercise-video/590/a325ae2e-686b-4a1f-aff2-ba37fa3fa157.MOV',
+    }),
+    match: 'related',
+    difference:
+      'A seated calf machine is shown. Rest dumbbells on your thighs instead, never on the kneecaps.',
+  },
 };
 
 export const demos: Readonly<Partial<Record<string, ExerciseDemo>>> = {
   ...fileDemos,
   'barbell-romanian-deadlift': {
     ...vimeo('1000189819'),
-    match: 'movement',
-  },
-  'incline-db-curl': {
-    ...animation('incline-curl'),
     match: 'movement',
   },
   'hanging-knee-raise': {
@@ -241,117 +319,71 @@ export const demos: Readonly<Partial<Record<string, ExerciseDemo>>> = {
     difference:
       'Hanging from a bar is shown. Hold yourself up on straight arms on the dip handles instead; the pelvic curl is the same.',
   },
-  'floor-reverse-crunch': {
-    ...animation('reverse-crunch'),
-    match: 'movement',
-  },
-  'machine-pec-fly': {
-    ...animation('pec-fly'),
-    match: 'movement',
-  },
-  'machine-reverse-fly': {
-    ...animation('reverse-fly'),
-    match: 'movement',
-  },
-  'unica-seated-row': {
-    ...animation('supported-row'),
-    match: 'related',
-    difference: 'Illustrated chest-supported row. Use the UNICA long bars and its support setup.',
-  },
-  'unica-lat-pulldown': {
-    ...animation('pulldown'),
-    match: 'related',
-    difference: 'Illustrated lat-bar path. Use the UNICA high hook and its own seat/thigh setup.',
-  },
-  'selection-leg-extension': {
-    ...animation('leg-extension'),
-    match: 'related',
-    difference:
-      'Illustrated knee-extension path. Use your Selection machine’s knee-pivot and pad settings.',
-  },
-  'supported-db-stationary-split-squat': {
-    ...animation('split-squat'),
-    match: 'movement',
-  },
-  'supported-single-leg-standing-db-calf-raise': {
-    ...animation('standing-calf'),
-    match: 'movement',
-  },
-  'db-wrist-curl': {
-    ...animation('wrist-curl'),
-    match: 'movement',
-  },
-  'cable-wrist-curl': {
-    ...animation('wrist-curl'),
-    match: 'related',
-    difference:
-      'Shown with DBs. Hold the lat bar from the low hook instead; the wrist movement is the same.',
-  },
-  'db-reverse-wrist-curl': {
-    ...animation('reverse-wrist-curl'),
-    match: 'movement',
-  },
-  'cable-reverse-wrist-curl': {
-    ...animation('reverse-wrist-curl'),
-    match: 'related',
-    difference:
-      'Shown with DBs. Hold the lat bar from the low hook instead; the wrist movement is the same.',
-  },
-  'db-reverse-curl': {
-    ...animation('reverse-curl'),
-    match: 'movement',
-  },
-  'cable-reverse-curl': {
-    ...animation('reverse-curl'),
-    match: 'related',
-    difference: 'Shown with DBs. Hold the lat bar from the low hook instead, palms down.',
-  },
-  'supported-bodyweight-single-leg-calf-raise': {
-    ...animation('bodyweight-calf'),
-    match: 'movement',
-  },
   'smith-flat-bench-press': {
     ...vimeo('223935810'),
-    match: 'movement',
-  },
-  'low-incline-smith-press': {
-    ...animation('smith-incline'),
     match: 'movement',
   },
   'bench-supported-one-arm-db-row': {
     ...vimeo('363596447'),
     match: 'movement',
   },
-  'one-arm-standing-cable-fly': {
-    ...animation('cable-fly'),
+  'machine-pec-fly': {
+    ...vimeo('223935831'),
     match: 'movement',
   },
-  'standing-one-leg-cable-curl': {
-    ...file('seated-leg-curl', 12, {
-      ...wger,
-      creditUrl:
-        'https://wger.de/media/exercise-video/366/43df4b79-d4c3-4fbf-bcb5-e0d825b84120.MOV',
-    }),
-    match: 'related',
-    difference:
-      'A seated machine curl is shown. Stand at the low cable with the ankle strap; the knee-curl path is the same.',
+  'machine-reverse-fly': {
+    ...vimeo('223935802'),
+    match: 'movement',
   },
-  'unica-leg-extension': {
-    ...animation('leg-extension'),
+  'low-incline-smith-press': {
+    ...vimeo('223933646'),
     match: 'related',
     difference:
-      'Illustrated knee-extension path. Use the UNICA leg-extension setup in your saved cues.',
+      'Free-bar incline press shown. Use the Smith machine fixed track with the bench at a low incline and safety stops set.',
+  },
+  'incline-db-curl': {
+    ...youtube('aTYlqC_JacQ'),
+    match: 'movement',
+  },
+  'db-wrist-curl': {
+    ...youtube('3rsKOL8scsU'),
+    match: 'movement',
+  },
+  'cable-wrist-curl': {
+    ...youtube('WVAaKJvToe0'),
+    match: 'related',
+    difference:
+      'Standing behind-the-back cable wrist curl shown. You can also sit on a bench with forearms on your thighs using the UNICA lat bar on the low hook.',
+  },
+  'db-reverse-wrist-curl': {
+    ...youtube('osYPwlBiCRM'),
+    match: 'movement',
+  },
+  'cable-reverse-wrist-curl': {
+    ...youtube('osYPwlBiCRM'),
+    match: 'related',
+    difference:
+      'Shown with DBs. Hold the UNICA lat bar from the low hook instead, palms down; the wrist movement is the same.',
+  },
+  'db-reverse-curl': {
+    ...youtube('hUA-fIpM7nA'),
+    match: 'movement',
+  },
+  'cable-reverse-curl': {
+    ...youtube('hUA-fIpM7nA'),
+    match: 'related',
+    difference: 'Shown with DBs. Hold the UNICA lat bar from the low hook instead, palms down.',
+  },
+  'floor-reverse-crunch': {
+    ...youtube('XY8KzdDcMFg'),
+    match: 'movement',
   },
   'landmine-t-bar-row': {
-    ...animation('landmine-row'),
+    ...youtube('EyA_ym9Ksaw'),
     match: 'movement',
   },
   'cable-anti-rotation-press': {
-    ...animation('pallof'),
-    match: 'movement',
-  },
-  'seated-db-calf-raise': {
-    ...animation('seated-calf'),
+    ...youtube('xeFp4MXad98'),
     match: 'movement',
   },
 };

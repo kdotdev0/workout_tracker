@@ -163,6 +163,23 @@ describe('working app integration', () => {
     expect(summaries.every((summary) => !/^\d/.test(summary.text()))).toBe(true);
     expect(summaries[0]!.text()).toContain('Barbell bench press');
     expect(summaries[0]!.text()).toContain('2 × 5–8');
+    expect(wrapper.find('[data-forearm-separator]').text()).toContain('Forearms');
+    expect(
+      wrapper.findAll('[data-exercise-group="main"] summary [data-exercise-icon]'),
+    ).toHaveLength(8);
+    expect(
+      wrapper.findAll('[data-exercise-group="forearms"] summary [data-exercise-icon]'),
+    ).toHaveLength(2);
+  });
+
+  it('marks the forearm finisher subtly in session progress and header without affecting older sessions', async () => {
+    const wrapper = await app();
+    await begin(wrapper, '2026-11-02');
+    const steps = wrapper.findAll('nav[aria-label="Exercises"] button');
+    expect(steps).toHaveLength(10);
+    expect(steps[8]!.classes()).toContain('is-group-break');
+    await steps[8]!.trigger('click');
+    expect(wrapper.text()).toContain('Exercise 9 of 10 · Forearms');
   });
 
   it.each([
@@ -185,7 +202,6 @@ describe('working app integration', () => {
         ? 'demos/barbell-bench-press.mp4'
         : 'https://player.vimeo.com/video/1000189819',
     );
-    expect(wrapper.html()).not.toMatch(/youtube|ytimg/i);
     await button(wrapper, 'Close demo').trigger('click');
     expect(wrapper.find('video').exists()).toBe(false);
     expect(wrapper.find('iframe').exists()).toBe(false);

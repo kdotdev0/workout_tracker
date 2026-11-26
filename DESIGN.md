@@ -48,8 +48,8 @@ The accepted design uses dark graphite surfaces, a volt accent and coral highlig
 
 ## Media and data truth
 
-- Demonstrations use real footage or explicitly labelled movement diagrams, as approved by the user. Keep previews paired with their actual clip or diagram model. State source rights and relevant setup differences.
-- No YouTube player. Native/Vimeo footage starts after a tap and needs internet. Diagrams use the same starting position for preview and playback, with pause/restart controls, offscreen/background suspension and reduced-motion stepping. Diagram colours follow existing tokens; they illustrate movement, not measured activation.
+- Demonstrations use real human footage only (licensed local clips, verified public Vimeo embeds, and tap-to-play `youtube-nocookie.com` embeds where no free local or Vimeo clip exists). Keep previews paired with their actual video. State source rights and relevant setup differences.
+- All footage starts after a tap and needs internet. Stick-figure movement animations are not used.
 - Reuse guides for the same movement, including legacy alternative IDs. When a dedicated guide is absent, show the session's stored setup cues.
 - Body maps show target regions, not measured activation, fatigue or recovery.
 - Preserve device-local storage, revision-conflict protection and JSON backup/restore. A UI update does not imply cloud sync.

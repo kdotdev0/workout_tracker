@@ -808,6 +808,10 @@ export function getExercises(workoutId: WorkoutId, phase: Phase): Exercise[] {
   }));
 }
 
+export function isForearmExercise(exercise: Pick<Exercise, 'primary'>): boolean {
+  return exercise.primary.includes('Forearms');
+}
+
 export function workoutForDate(date: string): WorkoutId | null {
   const weekday = new Date(`${date}T12:00:00`).getDay();
   return (

@@ -265,6 +265,10 @@
   padding-inline: 12px;
 }
 
+.exercise-list--forearms {
+  background: color-mix(in oklab, var(--card) 72%, var(--background));
+}
+
 .exercise-list > details + details {
   border-top: 1px solid var(--border);
 }
@@ -374,18 +378,22 @@
 
 /* Each segment fills only after every working set of that exercise is saved. */
 .segments {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: 1fr;
+  display: flex;
   gap: 4px;
 }
 
 .segments > span {
+  flex: 1 1 0;
   height: 4px;
   border-radius: 999px;
   background: var(--secondary);
   overflow: hidden;
   position: relative;
+}
+
+.segments > span.is-group-break,
+.step-bar > button.is-group-break {
+  margin-left: 8px;
 }
 
 .segments > span > i {
@@ -399,14 +407,13 @@
 
 /* Thin progress bar, with a 44 px target for each exercise. */
 .step-bar {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: 1fr;
+  display: flex;
   gap: 4px;
   margin-block: -19px;
 }
 
 .step-bar > button {
+  flex: 1 1 0;
   display: flex;
   align-items: center;
   height: 44px;

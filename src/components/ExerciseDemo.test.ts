@@ -6,9 +6,9 @@ import { demos } from '@/domain/demos';
 
 const wrappers: VueWrapper[] = [];
 
-function player(exerciseId = 'barbell-bench-press') {
+function player(exerciseId = 'barbell-bench-press', exerciseName = 'Barbell bench press') {
   const wrapper = mount(ExerciseDemo, {
-    props: { demo: demos[exerciseId]!, exerciseId, exerciseName: 'Barbell bench press' },
+    props: { demo: demos[exerciseId]!, exerciseId, exerciseName },
     attachTo: document.body,
   });
   wrappers.push(wrapper);
@@ -46,7 +46,7 @@ describe('quick exercise demonstration', () => {
   });
 
   it('uses base-relative local videos and real posters for the CC clips', async () => {
-    const wrapper = player('dips');
+    const wrapper = player('dips', 'Dips');
     expect(wrapper.get('img').attributes('src')).toBe(`${import.meta.env.BASE_URL}demos/dips.jpg`);
     await wrapper.get('[data-quick-demo]').trigger('click');
     expect(wrapper.get('video').attributes('src')).toBe(
@@ -57,7 +57,7 @@ describe('quick exercise demonstration', () => {
   });
 
   it('pairs a Vimeo video with its own poster and loads the player only after a tap', async () => {
-    const wrapper = player('barbell-romanian-deadlift');
+    const wrapper = player('barbell-romanian-deadlift', 'Barbell Romanian deadlift');
     expect(wrapper.find('iframe').exists()).toBe(false);
     expect(wrapper.find('video').exists()).toBe(false);
     expect(wrapper.get('img').attributes('src')).toBe(
@@ -76,25 +76,52 @@ describe('quick exercise demonstration', () => {
     expect(frame.attributes()).toHaveProperty('allowfullscreen');
     expect(wrapper.text()).toContain('ActionJax Strength & Performance');
     expect(wrapper.find('video').exists()).toBe(false);
-    expect(wrapper.html()).not.toMatch(/youtube|ytimg/i);
+    await wrapper.get('button').trigger('click');
+    expect(wrapper.find('iframe').exists()).toBe(false);
+    expect(document.activeElement).toBe(wrapper.get('[data-quick-demo]').element);
+  });
+
+  it('pairs a privacy-enhanced YouTube video with its own poster and loads only after a tap', async () => {
+    const wrapper = player('db-wrist-curl', 'Seated DB wrist curl');
+    expect(wrapper.find('iframe').exists()).toBe(false);
+    expect(wrapper.find('video').exists()).toBe(false);
+    expect(wrapper.get('img').attributes('src')).toBe(
+      'https://i.ytimg.com/vi/3rsKOL8scsU/hqdefault.jpg',
+    );
+    expect(wrapper.text()).toContain('My PT Hub');
+    expect(wrapper.text()).toContain('YouTube');
+    await wrapper.get('[data-quick-demo]').trigger('click');
+    const frame = wrapper.get('iframe');
+    const url = new URL(frame.attributes('src')!);
+    expect(url.origin).toBe('https://www.youtube-nocookie.com');
+    expect(url.pathname).toBe('/embed/3rsKOL8scsU');
+    expect(url.searchParams.get('autoplay')).toBe('1');
+    expect(url.searchParams.get('mute')).toBe('1');
+    expect(url.searchParams.get('loop')).toBe('1');
+    expect(url.searchParams.get('playlist')).toBe('3rsKOL8scsU');
+    expect(url.searchParams.get('rel')).toBe('0');
+    expect(frame.attributes()).toHaveProperty('allowfullscreen');
     await wrapper.get('button').trigger('click');
     expect(wrapper.find('iframe').exists()).toBe(false);
     expect(document.activeElement).toBe(wrapper.get('[data-quick-demo]').element);
   });
 
   it('retries an embedded player and unloads it when the exercise changes', async () => {
-    const wrapper = player('barbell-romanian-deadlift');
+    const wrapper = player('barbell-romanian-deadlift', 'Barbell Romanian deadlift');
     await wrapper.get('[data-quick-demo]').trigger('click');
     const previousFrame = wrapper.get('iframe').element;
     const retry = wrapper.findAll('button').find((button) => button.text() === 'Retry demo')!;
     await retry.trigger('click');
     expect(wrapper.get('iframe').element).not.toBe(previousFrame);
     await wrapper.setProps({
-      exerciseId: 'floor-reverse-crunch',
-      demo: demos['floor-reverse-crunch']!,
+      exerciseId: 'incline-db-curl',
+      exerciseName: 'Incline DB curl',
+      demo: demos['incline-db-curl']!,
     });
     expect(wrapper.find('iframe').exists()).toBe(false);
-    expect(wrapper.find('[data-motion="reverse-crunch"]').exists()).toBe(true);
+    expect(wrapper.get('img').attributes('src')).toBe(
+      'https://i.ytimg.com/vi/aTYlqC_JacQ/hqdefault.jpg',
+    );
   });
 
   it('keeps playback available when a poster fails instead of substituting another exercise', async () => {
@@ -108,25 +135,9 @@ describe('quick exercise demonstration', () => {
   });
 
   it('shows variation differences before starting playback', () => {
-    const wrapper = player('paused-barbell-bench-press');
+    const wrapper = player('paused-barbell-bench-press', 'Paused barbell bench press');
     expect(wrapper.text()).toContain('Pause not shown');
     expect(wrapper.find('video').exists()).toBe(false);
-  });
-
-  it('uses the same movement model for an animation preview and its playback', async () => {
-    const wrapper = player('incline-db-curl');
-    const preview = wrapper.get('[data-motion]');
-    expect(preview.attributes('data-motion')).toBe('incline-curl');
-    expect(preview.attributes('data-phase')).toBe('0.000');
-    expect(wrapper.find('img, video, iframe').exists()).toBe(false);
-    await wrapper.get('[data-quick-demo]').trigger('click');
-    expect(wrapper.get('[data-motion]').attributes('data-motion')).toBe('incline-curl');
-    const pause = wrapper.findAll('button').find((button) => button.text() === 'Pause animation')!;
-    await pause.trigger('click');
-    expect(wrapper.text()).toContain('Resume animation');
-    await wrapper.get('button').trigger('click');
-    expect(wrapper.find('[data-quick-demo]').exists()).toBe(true);
-    expect(wrapper.get('[data-motion]').attributes('data-phase')).toBe('0.000');
   });
 
   it('unloads on close and restores focus', async () => {
