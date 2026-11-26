@@ -14,6 +14,8 @@ const expectedTables = {
     ['machine-reverse-fly', 2, 12, 20, 'reps', false, 120, '1–2', 'machine'],
     ['unica-arm-curl', 2, 10, 15, 'reps', false, 120, '1–2', 'machine'],
     ['one-arm-cable-overhead-triceps-extension', 2, 10, 15, 'reps', true, 120, '1–2', 'cable'],
+    ['db-wrist-curl', 2, 8, 15, 'reps', false, 60, '2', 'dumbbell'],
+    ['db-reverse-wrist-curl', 2, 12, 20, 'reps', false, 60, '2', 'dumbbell'],
   ],
   lowerA: [
     ['barbell-back-squat', 3, 5, 8, 'reps', false, 240, '2', 'barbell'],
@@ -22,6 +24,8 @@ const expectedTables = {
     ['selection-leg-extension', 2, 10, 15, 'reps', false, 120, '1–2', 'machine'],
     ['supported-single-leg-standing-db-calf-raise', 3, 8, 15, 'reps', true, 120, '1–2', 'dumbbell'],
     ['hanging-knee-raise', 2, 8, 15, 'reps', false, 90, '2', 'bodyweight'],
+    ['db-wrist-curl', 2, 8, 15, 'reps', false, 60, '2', 'dumbbell'],
+    ['db-reverse-curl', 2, 10, 15, 'reps', false, 60, '2', 'dumbbell'],
   ],
   upperB: [
     ['low-incline-db-bench-press', 3, 8, 12, 'reps', false, 180, '2', 'dumbbell'],
@@ -32,6 +36,8 @@ const expectedTables = {
     ['machine-reverse-fly', 2, 12, 20, 'reps', false, 120, '1–2', 'machine'],
     ['incline-db-curl', 2, 10, 15, 'reps', false, 120, '1–2', 'dumbbell'],
     ['one-arm-cable-overhead-triceps-extension', 2, 10, 15, 'reps', true, 120, '1–2', 'cable'],
+    ['db-wrist-curl', 2, 8, 15, 'reps', false, 60, '2', 'dumbbell'],
+    ['db-reverse-wrist-curl', 2, 12, 20, 'reps', false, 60, '2', 'dumbbell'],
   ],
   lowerB: [
     ['barbell-romanian-deadlift', 2, 6, 10, 'reps', false, 180, '2', 'barbell'],
@@ -40,6 +46,8 @@ const expectedTables = {
     ['selection-leg-extension', 2, 10, 15, 'reps', false, 120, '1–2', 'machine'],
     ['supported-single-leg-standing-db-calf-raise', 3, 8, 15, 'reps', true, 120, '1–2', 'dumbbell'],
     ['dip-station-knee-raise', 2, 8, 15, 'reps', false, 90, '2', 'bodyweight'],
+    ['db-wrist-curl', 2, 8, 15, 'reps', false, 60, '2', 'dumbbell'],
+    ['db-reverse-curl', 2, 10, 15, 'reps', false, 60, '2', 'dumbbell'],
   ],
 };
 
@@ -68,12 +76,12 @@ describe('programme tables', () => {
       workoutIds.map((workoutId) =>
         getExercises(workoutId, 'baseline').reduce((total, exercise) => total + exercise.sets, 0),
       ),
-    ).toEqual([19, 15, 19, 15]);
+    ).toEqual([23, 19, 23, 19]);
     expect(
       workoutIds.map((workoutId) =>
         getExercises(workoutId, 'intro').reduce((total, exercise) => total + exercise.sets, 0),
       ),
-    ).toEqual([16, 12, 16, 12]);
+    ).toEqual([20, 16, 20, 16]);
   });
 
   it.each(workoutIds)(
@@ -164,7 +172,7 @@ describe('programme tables', () => {
   });
 
   it('trains abs on the dip handles, never on the floor', () => {
-    const abs = workouts.lowerB.exercises.at(-1)!;
+    const abs = workouts.lowerB.exercises.find((exercise) => exercise.loadKind === 'bodyweight')!;
     expect(abs).toMatchObject({
       id: 'dip-station-knee-raise',
       loadKind: 'bodyweight',
@@ -216,7 +224,15 @@ describe('programme tables', () => {
         .filter((e) => e.primary.some((m) => ['Lats', 'Mid-back'].includes(m)))
         .reduce((n, e) => n + e.sets, 0),
     ).toBe(10);
-    expect(new Set(all.flatMap((w) => w.exercises.map((e) => e.id))).size).toBe(18);
+    // Forearms: wrist curls every session, plus one extensor or palms-down curl.
+    expect(
+      all
+        .flatMap((w) => w.exercises)
+        .filter((e) => e.primary.includes('Forearms'))
+        .reduce((n, e) => n + e.sets, 0),
+    ).toBe(16);
+    expect(all.every((w) => w.exercises.at(-2)!.id === 'db-wrist-curl')).toBe(true);
+    expect(new Set(all.flatMap((w) => w.exercises.map((e) => e.id))).size).toBe(21);
   });
 
   it.each(workoutIds)('%s has no duplicate IDs', (workoutId) => {

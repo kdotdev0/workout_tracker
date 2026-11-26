@@ -57,8 +57,10 @@ Bench-strength day. Warm up 5 minutes on the bike or rower, then perform 3–4 p
 | Machine reverse fly                      | 2 × 12–20 reps      | 90–120 s | 1–2 | Rear delts         | Bent-over DB reverse fly — 2 × 12–20 reps             |
 | UNICA supported arm curl                 | 2 × 10–15 reps      | 90–120 s | 1–2 | Biceps, Brachialis | Standing DB curl — 2 × 10–15 reps                     |
 | One-arm cable overhead triceps extension | 2 × 10–15 reps/side | 90–120 s | 1–2 | Triceps            | One-DB two-hand overhead extension — 2 × 10–15 reps   |
+| Seated DB wrist curl                     | 2 × 8–15 reps       | 60 s     | 2   | Forearms           | Cable wrist curl — 2 × 8–15 reps                      |
+| Seated DB reverse wrist curl             | 2 × 12–20 reps      | 60 s     | 2   | Forearms           | Cable reverse wrist curl — 2 × 12–20 reps             |
 
-**19 baseline working sets; 16 in Introduction.** Alternatives replace the original exercise; they are not extra sets.
+**23 baseline working sets; 20 in Introduction.** Alternatives replace the original exercise; they are not extra sets.
 
 ### Day 2 — Lower A (Tuesday)
 
@@ -72,8 +74,10 @@ Squat-strength day. Warm up 5 minutes on the bike, then perform 3–4 squat ramp
 | Leg extension                               | 2 × 10–15 reps      | 90–120 s | 1–2 | Quads              | UNICA leg extension — 2 × 10–15 reps                             |
 | Supported single-leg standing DB calf raise | 3 × 8–15 reps/side  | 90–120 s | 1–2 | Calves             | Supported bodyweight single-leg calf raise — 3 × 15–25 reps/side |
 | Hanging knee raise with pelvic curl         | 2 × 8–15 reps       | 90 s     | 2   | Abdominals         | Dip-station knee raise — 2 × 8–15 reps                           |
+| Seated DB wrist curl                        | 2 × 8–15 reps       | 60 s     | 2   | Forearms           | Cable wrist curl — 2 × 8–15 reps                                 |
+| Standing DB reverse curl                    | 2 × 10–15 reps      | 60 s     | 2   | Forearms           | Cable reverse curl — 2 × 10–15 reps                              |
 
-**15 baseline working sets; 12 in Introduction.** Alternatives replace the original exercise; they are not extra sets.
+**19 baseline working sets; 16 in Introduction.** Alternatives replace the original exercise; they are not extra sets.
 
 ### Day 3 — Upper B (Thursday)
 
@@ -89,8 +93,10 @@ Incline-press day. Warm up 5 minutes, then perform 2–3 gradually heavier incli
 | Machine reverse fly                      | 2 × 12–20 reps      | 90–120 s | 1–2 | Rear delts      | Bent-over DB reverse fly — 2 × 12–20 reps             |
 | Incline DB curl                          | 2 × 10–15 reps      | 90–120 s | 1–2 | Biceps          | Standing DB curl — 2 × 10–15 reps                     |
 | One-arm cable overhead triceps extension | 2 × 10–15 reps/side | 90–120 s | 1–2 | Triceps         | One-DB two-hand overhead extension — 2 × 10–15 reps   |
+| Seated DB wrist curl                     | 2 × 8–15 reps       | 60 s     | 2   | Forearms        | Cable wrist curl — 2 × 8–15 reps                      |
+| Seated DB reverse wrist curl             | 2 × 12–20 reps      | 60 s     | 2   | Forearms        | Cable reverse wrist curl — 2 × 12–20 reps             |
 
-**19 baseline working sets; 16 in Introduction.** Alternatives replace the original exercise; they are not extra sets.
+**23 baseline working sets; 20 in Introduction.** Alternatives replace the original exercise; they are not extra sets.
 
 ### Day 4 — Lower B (Friday)
 
@@ -104,26 +110,29 @@ Hinge and unilateral-leg day. Warm up 5 minutes, rehearse the hinge, then perfor
 | Leg extension                               | 2 × 10–15 reps      | 90–120 s | 1–2 | Quads              | UNICA leg extension — 2 × 10–15 reps                             |
 | Supported single-leg standing DB calf raise | 3 × 8–15 reps/side  | 90–120 s | 1–2 | Calves             | Supported bodyweight single-leg calf raise — 3 × 15–25 reps/side |
 | Dip-station knee raise                      | 2 × 8–15 reps       | 90 s     | 2   | Abdominals         | Hanging knee raise with pelvic curl — 2 × 8–15 reps              |
+| Seated DB wrist curl                        | 2 × 8–15 reps       | 60 s     | 2   | Forearms           | Cable wrist curl — 2 × 8–15 reps                                 |
+| Standing DB reverse curl                    | 2 × 10–15 reps      | 60 s     | 2   | Forearms           | Cable reverse curl — 2 × 10–15 reps                              |
 
-**15 baseline working sets; 12 in Introduction.** Alternatives replace the original exercise; they are not extra sets.
+**19 baseline working sets; 16 in Introduction.** Alternatives replace the original exercise; they are not extra sets.
 
 ## Weekly coverage
 
-| Region                                    | Target weekly working sets | Frequency       |
-| ----------------------------------------- | -------------------------: | --------------- |
-| Chest                                     |                         10 | 2 sessions/week |
-| Back: pulldowns + rows                    |                         10 | 2 sessions/week |
-| Quadriceps                                |                         10 | 2 sessions/week |
-| Hamstrings: RDLs + curls                  |                         10 | 2 sessions/week |
-| Glutes: shared squat/split-squat/RDL work |                         10 | 2 sessions/week |
-| Side delts                                |                          6 | 2 sessions/week |
-| Rear delts                                |                          4 | 2 sessions/week |
-| Biceps/elbow-flexor isolation             |                          4 | 2 sessions/week |
-| Triceps isolation                         |                          4 | 2 sessions/week |
-| Calves                                    |                          6 | 2 sessions/week |
-| Abdominals                                |                          4 | 2 sessions/week |
+| Region                                            | Target weekly working sets | Frequency       |
+| ------------------------------------------------- | -------------------------: | --------------- |
+| Chest                                             |                         10 | 2 sessions/week |
+| Back: pulldowns + rows                            |                         10 | 2 sessions/week |
+| Quadriceps                                        |                         10 | 2 sessions/week |
+| Hamstrings: RDLs + curls                          |                         10 | 2 sessions/week |
+| Glutes: shared squat/split-squat/RDL work         |                         10 | 2 sessions/week |
+| Side delts                                        |                          6 | 2 sessions/week |
+| Rear delts                                        |                          4 | 2 sessions/week |
+| Biceps/elbow-flexor isolation                     |                          4 | 2 sessions/week |
+| Triceps isolation                                 |                          4 | 2 sessions/week |
+| Calves                                            |                          6 | 2 sessions/week |
+| Abdominals                                        |                          4 | 2 sessions/week |
+| Forearms: wrist curls + extensor/palms-down curls |                         16 | 4 sessions/week |
 
-Glute sets share lower-body compounds, and arms receive additional pulling/pressing work. Front delts contribute to both upper-day presses; there is no extra shoulder-press slot in this block. Do not sum muscle-group counts into an effective-set total. Unilateral sets count once per muscle on each side, not twice. The 68-set target is a coaching starting dose, not an individual optimum.
+Glute sets share lower-body compounds, and arms receive additional pulling/pressing work. Front delts contribute to both upper-day presses; there is no extra shoulder-press slot in this block. Do not sum muscle-group counts into an effective-set total. Unilateral sets count once per muscle on each side, not twice. Forearm work (added 26 November 2026) ends every session: wrist curls each day, plus reverse wrist curls on upper days and palms-down curls on lower days. It builds forearm muscle; adult wrist bone width does not change with training. The 68-set target excludes it and is a coaching starting dose, not an individual optimum.
 
 ## Execution and available equipment
 
@@ -174,6 +183,9 @@ No unverified ankle cuff, rope, calf platform, assisted-pull-up machine or leg p
 - **Kassiano et al. (2026).** _Comparison of Muscle Hypertrophy and Strength Adaptations Induced by Back Squat and Leg Extension Resistance Exercises._ [Source / DOI](https://doi.org/10.1519/JSC.0000000000005338)
 - **Larsen et al. (2025).** _Dumbbell versus cable lateral raises for lateral deltoid hypertrophy: an experimental study._ [Source / DOI](https://doi.org/10.3389/fphys.2025.1611468)
 - **Kobayashi et al. (2026).** _Exercise-specific preferential hypertrophy of individual elbow flexor muscles after incline versus preacher dumbbell curl training._ [Source / DOI](https://doi.org/10.1080/02640414.2026.2741751)
+- **Yamane et al. (2015).** _Does Regular Post-exercise Cold Application Attenuate Trained Muscle Adaptation?_ Wrist-flexor thickness increased after six weeks of wrist-curl training. [Source / DOI](https://doi.org/10.1055/s-0034-1398652)
+- **Andrushko et al. (2018).** _Unilateral strength training leads to muscle-specific sparing effects during opposite homologous limb immobilization._ Trained wrist flexors thickened about 7% in four weeks. [Source / DOI](https://doi.org/10.1152/japplphysiol.00971.2017)
+- **Ireland et al. (2014).** _Effects of age and starting age upon side asymmetry in the arms of veteran tennis players: a cross-sectional study._ Players who started as adults showed no distal-radius size asymmetry. [Source / DOI](https://doi.org/10.1007/s00198-014-2617-5)
 - **Chaves et al. (2020).** _Effects of Horizontal and Incline Bench Press on Neuromuscular Adaptations in Untrained Young Men._ [Source / DOI](https://pmc.ncbi.nlm.nih.gov/articles/PMC7449336/)
 - **Kubo, Ikebukuro and Yata (2019).** _Effects of squat training with different depths on lower limb muscle volumes._ [Source / DOI](https://doi.org/10.1007/s00421-019-04181-y)
 - **Crawford et al. (2025).** _Hamstrings Muscle Architecture and Morphology Following 6 wk of an Eccentrically Biased Romanian Deadlift or Nordic Hamstring Exercise Intervention._ [Source / DOI](https://doi.org/10.1249/MSS.0000000000003701)

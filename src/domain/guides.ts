@@ -321,6 +321,29 @@ const exerciseGuides: Record<string, Guide> = {
     ],
     stop: ['Stop when the shoulders shrug up or the legs start swinging.'],
   },
+  'db-wrist-curl': {
+    illustration: 'wrist-curl',
+    checks: [
+      'Forearms rest on the thighs, palms up',
+      'Roll to the fingers, curl fully up',
+      'Lower over about 3 seconds',
+    ],
+    stop: ['Stop for sharp wrist pain; a burning forearm is expected.'],
+  },
+  'db-reverse-wrist-curl': {
+    illustration: 'wrist-extension',
+    checks: [
+      'Forearms rest on the thighs, palms down',
+      'Lift only the backs of the hands',
+      'Light DBs, slow lowering',
+    ],
+    stop: ['Stop for sharp wrist or elbow pain.'],
+  },
+  'db-reverse-curl': {
+    illustration: 'reverse-curl',
+    checks: ['Palms down, elbows by your sides', 'Wrists stay straight', 'No hip swing'],
+    stop: ['Stop for sharp elbow or wrist pain.'],
+  },
   'floor-reverse-crunch': {
     illustration: 'reverse-crunch',
     checks: [
@@ -458,6 +481,26 @@ const evidence: Record<string, GuideEvidence> = {
       'This is a practical abdominal-flexion choice. A trial has not shown it to outperform every abdominal exercise.',
     sources: [researchSources.prescription],
   },
+  'db-wrist-curl': {
+    selection:
+      'Wrist curls train the largest forearm muscles directly. Forearm bone width does not change in adults, so muscle is what adds visible size.',
+    qualification:
+      'Small trials measured thicker wrist flexors after 4–6 weeks of wrist-curl training. They used other set-ups, not this exact routine.',
+    sources: [researchSources.wristFlexors, researchSources.wristEccentric],
+  },
+  'db-reverse-wrist-curl': {
+    selection: 'Trains the back of the forearm, balancing the wrist-curl work.',
+    qualification:
+      'No trial was found measuring muscle growth from reverse wrist curls. It is included for balance, as common coaching practice.',
+    sources: [researchSources.prescription],
+  },
+  'db-reverse-curl': {
+    selection:
+      'Palms-down curls work the muscle along the top of the forearm near the elbow, which shows most from the side.',
+    qualification:
+      'A 12-week MRI trial found that muscle grew 13–18% from ordinary palms-up curls. No trial was found that measured palms-down curls.',
+    sources: [researchSources.curls],
+  },
   'floor-reverse-crunch': {
     selection:
       'A floor-based pelvic curl makes the second abdominal exposure explicit without a hanging-grip requirement.',
@@ -486,6 +529,8 @@ const muscleIds: Record<string, number[]> = {
   'Rear delts': [2],
   Biceps: [1],
   Brachialis: [13],
+  // The wger body diagram has no forearm region, so forearm work is named but not highlighted.
+  Forearms: [],
   Triceps: [5],
   Quads: [10],
   Glutes: [8],

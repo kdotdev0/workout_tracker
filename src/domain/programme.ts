@@ -582,6 +582,99 @@ const dipKneeRaise: Movement = {
   },
 };
 
+const wristCurl: Movement = {
+  id: 'db-wrist-curl',
+  name: 'Seated DB wrist curl',
+  unit: 'reps',
+  perSide: false,
+  restSeconds: 60,
+  restLabel: '60 s',
+  targetRir: '2',
+  loadKind: 'dumbbell',
+  equipment: 'Flat bench and a DB pair',
+  primary: ['Forearms'],
+  supporting: [],
+  cues: [
+    'Sit on the bench with forearms on the thighs, palms up, wrists just past the knees.',
+    'Let the DBs roll toward the fingers, then curl the wrists up as far as they go.',
+    'Lower over about 3 seconds. Forearms stay on the thighs; add reps before load.',
+  ],
+  alternative: {
+    name: 'Cable wrist curl',
+    movement: {
+      id: 'cable-wrist-curl',
+      min: 8,
+      max: 15,
+      unit: 'reps',
+      perSide: false,
+      loadKind: 'cable',
+    },
+    note: 'Same sets, RIR and rest. UNICA lat bar on the low hook; sit on the bench, forearms on the thighs, palms up.',
+  },
+};
+
+const reverseWristCurl: Movement = {
+  id: 'db-reverse-wrist-curl',
+  name: 'Seated DB reverse wrist curl',
+  unit: 'reps',
+  perSide: false,
+  restSeconds: 60,
+  restLabel: '60 s',
+  targetRir: '2',
+  loadKind: 'dumbbell',
+  equipment: 'Flat bench and a light DB pair',
+  primary: ['Forearms'],
+  supporting: [],
+  cues: [
+    'Sit on the bench with forearms on the thighs, palms down, wrists just past the knees.',
+    'Lift the backs of the hands as high as they go without lifting the forearms.',
+    'Lower slowly. Use light DBs; this side of the forearm is weaker.',
+  ],
+  alternative: {
+    name: 'Cable reverse wrist curl',
+    movement: {
+      id: 'cable-reverse-wrist-curl',
+      min: 12,
+      max: 20,
+      unit: 'reps',
+      perSide: false,
+      loadKind: 'cable',
+    },
+    note: 'Same sets, RIR and rest. UNICA lat bar on the low hook; sit on the bench, forearms on the thighs, palms down.',
+  },
+};
+
+const reverseCurl: Movement = {
+  id: 'db-reverse-curl',
+  name: 'Standing DB reverse curl',
+  unit: 'reps',
+  perSide: false,
+  restSeconds: 60,
+  restLabel: '60 s',
+  targetRir: '2',
+  loadKind: 'dumbbell',
+  equipment: 'DB pair',
+  primary: ['Forearms'],
+  supporting: ['Brachialis', 'Biceps'],
+  cues: [
+    'Stand tall holding the DBs palms down, elbows by your sides.',
+    'Curl up keeping the palms down and the wrists straight.',
+    'Lower under control without swinging the hips.',
+  ],
+  alternative: {
+    name: 'Cable reverse curl',
+    movement: {
+      id: 'cable-reverse-curl',
+      min: 10,
+      max: 15,
+      unit: 'reps',
+      perSide: false,
+      loadKind: 'cable',
+    },
+    note: 'Same sets, RIR and rest. UNICA lat bar on the low hook, palms down, elbows by your sides.',
+  },
+};
+
 function prescribe(movement: Movement, sets: number, min: number, max: number): Exercise {
   return {
     ...movement,
@@ -603,7 +696,16 @@ export const workouts: Record<WorkoutId, Workout> = {
   upperA: {
     id: 'upperA',
     name: 'Upper A',
-    primary: ['Chest', 'Lats', 'Mid-back', 'Side delts', 'Rear delts', 'Biceps', 'Triceps'],
+    primary: [
+      'Chest',
+      'Lats',
+      'Mid-back',
+      'Side delts',
+      'Rear delts',
+      'Biceps',
+      'Triceps',
+      'Forearms',
+    ],
     supporting: ['Front delts', 'Upper back', 'Brachialis'],
     warmup:
       'Bench-strength day. Warm up 5 minutes on the bike or rower, then perform 3–4 progressively heavier bench warm-up sets and an easy pulldown set. Keep warm-ups well away from failure.',
@@ -616,12 +718,14 @@ export const workouts: Record<WorkoutId, Workout> = {
       prescribe(reverseFly, 2, 12, 20),
       prescribe(armCurl, 2, 10, 15),
       prescribe(cableOverheadExtension, 2, 10, 15),
+      prescribe(wristCurl, 2, 8, 15),
+      prescribe(reverseWristCurl, 2, 12, 20),
     ],
   },
   lowerA: {
     id: 'lowerA',
     name: 'Lower A',
-    primary: ['Quads', 'Glutes', 'Hamstrings', 'Calves', 'Abdominals'],
+    primary: ['Quads', 'Glutes', 'Hamstrings', 'Calves', 'Abdominals', 'Forearms'],
     supporting: ['Trunk and spinal bracing'],
     warmup:
       'Squat-strength day. Warm up 5 minutes on the bike, then perform 3–4 squat ramp-up sets with the safety arms tested and 1–2 lighter RDL sets. Warm-ups are additional to working sets.',
@@ -632,12 +736,23 @@ export const workouts: Record<WorkoutId, Workout> = {
       prescribe(legExtension, 2, 10, 15),
       prescribe(standingCalf, 3, 8, 15),
       prescribe(kneeRaise, 2, 8, 15),
+      prescribe(wristCurl, 2, 8, 15),
+      prescribe(reverseCurl, 2, 10, 15),
     ],
   },
   upperB: {
     id: 'upperB',
     name: 'Upper B',
-    primary: ['Chest', 'Lats', 'Mid-back', 'Side delts', 'Rear delts', 'Biceps', 'Triceps'],
+    primary: [
+      'Chest',
+      'Lats',
+      'Mid-back',
+      'Side delts',
+      'Rear delts',
+      'Biceps',
+      'Triceps',
+      'Forearms',
+    ],
     supporting: ['Front delts', 'Upper back', 'Brachialis'],
     warmup:
       'Incline-press day. Warm up 5 minutes, then perform 2–3 gradually heavier incline-press warm-up sets and one easy pulldown set. Lock the bench before picking up the DBs.',
@@ -650,12 +765,14 @@ export const workouts: Record<WorkoutId, Workout> = {
       prescribe(reverseFly, 2, 12, 20),
       prescribe(inclineCurl, 2, 10, 15),
       prescribe(cableOverheadExtension, 2, 10, 15),
+      prescribe(wristCurl, 2, 8, 15),
+      prescribe(reverseWristCurl, 2, 12, 20),
     ],
   },
   lowerB: {
     id: 'lowerB',
     name: 'Lower B',
-    primary: ['Quads', 'Glutes', 'Hamstrings', 'Calves', 'Abdominals'],
+    primary: ['Quads', 'Glutes', 'Hamstrings', 'Calves', 'Abdominals', 'Forearms'],
     supporting: ['Trunk and spinal bracing'],
     warmup:
       'Hinge and unilateral-leg day. Warm up 5 minutes, rehearse the hinge, then perform 2–3 RDL ramp-up sets and an easy supported split-squat set per side. Keep the rear foot on the floor.',
@@ -666,6 +783,8 @@ export const workouts: Record<WorkoutId, Workout> = {
       prescribe(legExtension, 2, 10, 15),
       prescribe(standingCalf, 3, 8, 15),
       prescribe(dipKneeRaise, 2, 8, 15),
+      prescribe(wristCurl, 2, 8, 15),
+      prescribe(reverseCurl, 2, 10, 15),
     ],
   },
 };

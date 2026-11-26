@@ -277,6 +277,35 @@ export const demos: Readonly<Partial<Record<string, ExerciseDemo>>> = {
     ...animation('standing-calf'),
     match: 'movement',
   },
+  'db-wrist-curl': {
+    ...animation('wrist-curl'),
+    match: 'movement',
+  },
+  'cable-wrist-curl': {
+    ...animation('wrist-curl'),
+    match: 'related',
+    difference:
+      'Shown with DBs. Hold the lat bar from the low hook instead; the wrist movement is the same.',
+  },
+  'db-reverse-wrist-curl': {
+    ...animation('reverse-wrist-curl'),
+    match: 'movement',
+  },
+  'cable-reverse-wrist-curl': {
+    ...animation('reverse-wrist-curl'),
+    match: 'related',
+    difference:
+      'Shown with DBs. Hold the lat bar from the low hook instead; the wrist movement is the same.',
+  },
+  'db-reverse-curl': {
+    ...animation('reverse-curl'),
+    match: 'movement',
+  },
+  'cable-reverse-curl': {
+    ...animation('reverse-curl'),
+    match: 'related',
+    difference: 'Shown with DBs. Hold the lat bar from the low hook instead, palms down.',
+  },
   'supported-bodyweight-single-leg-calf-raise': {
     ...animation('bodyweight-calf'),
     match: 'movement',

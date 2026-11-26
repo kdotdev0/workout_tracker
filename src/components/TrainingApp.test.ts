@@ -125,7 +125,12 @@ describe('working app integration', () => {
       completedAt: '2026-11-13T10:05:00.000Z',
     });
     expect(saved.settings.phase).toBe('intro');
-    expect(saved.sessions.at(-1)!.exercises.at(-1)!.exercise.id).toBe('dip-station-knee-raise');
+    expect(
+      saved.sessions
+        .at(-1)!
+        .exercises.map((entry) => entry.exercise.id)
+        .slice(-3),
+    ).toEqual(['dip-station-knee-raise', 'db-wrist-curl', 'db-reverse-curl']);
   });
 
   it('keeps a shared page frame across tabs and workout logging', async () => {
@@ -145,9 +150,13 @@ describe('working app integration', () => {
     const wrapper = await app();
     await wrapper.get('input[type="date"]').setValue('2026-11-02');
     const symbols = wrapper.findAll('summary [data-exercise-icon]');
-    expect(symbols).toHaveLength(8);
+    expect(symbols).toHaveLength(10);
     expect(symbols[0]!.attributes('data-exercise-icon')).toBe('bench-press');
     expect(symbols[1]!.attributes('data-exercise-icon')).toBe('lat-pulldown');
+    expect(symbols.slice(-2).map((symbol) => symbol.attributes('data-exercise-icon'))).toEqual([
+      'wrist-curl',
+      'wrist-extension',
+    ]);
     const summaries = wrapper
       .findAll('summary')
       .filter((summary) => summary.find('[data-exercise-icon]').exists());
@@ -517,16 +526,16 @@ describe('working app integration', () => {
   it('applies a phase change to the plan and to a started workout with nothing logged', async () => {
     const wrapper = await app();
     await begin(wrapper);
-    expect(wrapper.text()).toContain('0/8 exercises done');
+    expect(wrapper.text()).toContain('0/10 exercises done');
     await button(wrapper, 'Back to plan').trigger('click');
     await button(wrapper, 'Settings').trigger('click');
     await wrapper.get('#phase').setValue('baseline');
     await wrapper.get('form').trigger('submit');
     await vi.waitFor(() => expect(wrapper.text()).toContain('Settings saved.'));
     await button(wrapper, 'Plan').trigger('click');
-    expect(wrapper.text()).toContain('19 working sets');
+    expect(wrapper.text()).toContain('23 working sets');
     await button(wrapper, 'Start workout').trigger('click');
-    await vi.waitFor(() => expect(wrapper.text()).toContain('0/8 exercises done'));
+    await vi.waitFor(() => expect(wrapper.text()).toContain('0/10 exercises done'));
     expect((await savedData()).sessions.map((session) => session.phase)).toEqual(['baseline']);
   });
 
@@ -545,7 +554,7 @@ describe('working app integration', () => {
     await wrapper.get('form').trigger('submit');
     await vi.waitFor(() => expect(wrapper.text()).toContain('Settings saved.'));
     await button(wrapper, 'Plan').trigger('click');
-    expect(wrapper.text()).toContain('0 / 8 exercises done');
+    expect(wrapper.text()).toContain('0 / 10 exercises done');
     expect(wrapper.get('.segments i').attributes('style')).toContain('scaleX(0)');
     expect((await savedData()).sessions.map((session) => session.phase)).toEqual(['intro']);
   });

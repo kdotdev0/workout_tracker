@@ -39,7 +39,7 @@ describe('session lifecycle', () => {
   it('snapshots prescriptions and preserves the actual calendar date', () => {
     const session = startSession('upperA', '2026-11-02', 'intro');
     expect(session.date).toBe('2026-11-02');
-    expect(sessionProgress(session)).toEqual({ done: 0, total: 8 });
+    expect(sessionProgress(session)).toEqual({ done: 0, total: 10 });
     expect(startSession('upperA', '2026-11-02', 'baseline').exercises[0]!.exercise.sets).toBe(3);
     expect(session.exercises[0]!.exercise.sets).toBe(2);
   });
@@ -72,7 +72,7 @@ describe('session lifecycle', () => {
     expect(() => finishSession(session)).toThrow();
     const completed = finishSession(recordSet(session, session.exercises[0]!.exercise.id, set()));
     expect(completed.status).toBe('completed');
-    expect(sessionProgress(completed)).toEqual({ done: 0, total: 8 });
+    expect(sessionProgress(completed)).toEqual({ done: 0, total: 10 });
     expect(() => recordSet(completed, completed.exercises[0]!.exercise.id, set())).toThrow();
   });
   it('finds previous completed performances, not future dates or drafts', () => {

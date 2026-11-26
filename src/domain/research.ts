@@ -69,6 +69,19 @@ export const researchSources = {
       'Dumbbell versus cable lateral raises for lateral deltoid hypertrophy: an experimental study',
     url: 'https://doi.org/10.3389/fphys.2025.1611468',
   },
+  wristFlexors: {
+    authors: 'Yamane et al.',
+    year: 2015,
+    title: 'Does Regular Post-exercise Cold Application Attenuate Trained Muscle Adaptation?',
+    url: 'https://doi.org/10.1055/s-0034-1398652',
+  },
+  wristEccentric: {
+    authors: 'Andrushko et al.',
+    year: 2018,
+    title:
+      'Unilateral strength training leads to muscle-specific sparing effects during opposite homologous limb immobilization',
+    url: 'https://doi.org/10.1152/japplphysiol.00971.2017',
+  },
   curls: {
     authors: 'Kobayashi et al.',
     year: 2026,
