@@ -62,27 +62,40 @@ describe('exercise video demonstrations', () => {
     }
   });
 
-  it('uses real footage for machine flies, pulldowns, leg extensions, split squats and forearms', () => {
+  it('uses exact real-footage matches for machine flies, pulldowns, split squats, calves, dip raises and forearms', () => {
     expect(demos['barbell-romanian-deadlift']!.credit).toContain('Barbell Romanian Deadlift');
-    expect(demos['machine-pec-fly']).toMatchObject({ kind: 'vimeo', videoId: '223935831' });
-    expect(demos['machine-reverse-fly']).toMatchObject({ kind: 'vimeo', videoId: '223935802' });
-    expect(demos['unica-lat-pulldown']).toMatchObject({
-      kind: 'file',
-      src: 'demos/lat-pulldown.mp4',
-    });
+    expect(demos['machine-pec-fly']).toMatchObject({ kind: 'youtube', videoId: 'FDay9wFe5uE' });
+    expect(demos['machine-reverse-fly']).toMatchObject({ kind: 'youtube', videoId: '5YK4bgzXDp0' });
+    expect(demos['unica-lat-pulldown']).toMatchObject({ kind: 'youtube', videoId: 'EUIri47Epcg' });
+    expect(demos['unica-seated-row']).toMatchObject({ kind: 'youtube', videoId: '_FrrYQxA6kc' });
     expect(demos['selection-leg-extension']).toMatchObject({
       kind: 'file',
       src: 'demos/leg-extension.mp4',
     });
     expect(demos['supported-db-stationary-split-squat']).toMatchObject({
-      kind: 'file',
-      src: 'demos/split-squat.mp4',
+      kind: 'youtube',
+      videoId: 'cFJvAo9mEr4',
+    });
+    expect(demos['supported-single-leg-standing-db-calf-raise']).toMatchObject({
+      kind: 'youtube',
+      videoId: 'PTn6icEeH3Y',
+    });
+    expect(demos['dip-station-knee-raise']).toMatchObject({
+      kind: 'youtube',
+      videoId: 'vZUAU5IhSQQ',
+    });
+    expect(demos['standing-one-leg-cable-curl']).toMatchObject({
+      kind: 'youtube',
+      videoId: 'OA7c_8HfdOw',
     });
     for (const id of [
       'incline-db-curl',
       'db-wrist-curl',
+      'cable-wrist-curl',
       'db-reverse-wrist-curl',
+      'cable-reverse-wrist-curl',
       'db-reverse-curl',
+      'cable-reverse-curl',
     ]) {
       expect(demos[id]?.kind).toBe('youtube');
     }

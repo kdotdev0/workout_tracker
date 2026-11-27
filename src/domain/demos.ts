@@ -104,18 +104,6 @@ const fileDemos: Readonly<Record<string, ExerciseDemo>> = {
     ...file('dumbbell-lateral-raise', 20, yourMove),
     match: 'movement',
   },
-  'unica-lat-pulldown': {
-    ...file('lat-pulldown', 18.27, yourMove),
-    match: 'related',
-    difference:
-      'A standard cable pulldown station is shown. Use the UNICA lat bar on the high hook and its seat/thigh setup.',
-  },
-  'unica-seated-row': {
-    ...file('seated-cable-row', 8.23, yourMove),
-    match: 'related',
-    difference:
-      'A V-handle cable row is shown. Use the UNICA supported seated-row long bars with your torso against the pad.',
-  },
   'selection-leg-extension': {
     ...file('leg-extension', 18.53, yourMove),
     match: 'related',
@@ -127,12 +115,6 @@ const fileDemos: Readonly<Record<string, ExerciseDemo>> = {
     match: 'related',
     difference:
       'A dedicated leg-extension machine is shown. Use the UNICA leg-extension setup in your saved cues.',
-  },
-  'one-arm-standing-cable-fly': {
-    ...file('cable-crossover-mid', 20, yourMove),
-    match: 'related',
-    difference:
-      'Two-arm standing cable fly shown. Perform one arm at a time from a staggered stance without rotating your torso.',
   },
   dips: {
     ...file('dips', 12.75, {
@@ -200,16 +182,6 @@ const fileDemos: Readonly<Record<string, ExerciseDemo>> = {
     }),
     match: 'movement',
   },
-  'supported-db-stationary-split-squat': {
-    ...file('split-squat', 9, {
-      ...wger,
-      creditUrl:
-        'https://wger.de/media/exercise-video/205/4cd5dc48-897f-4e0c-8c5a-639a4098ceb1.MOV',
-    }),
-    match: 'related',
-    difference:
-      'Unsupported two-DB split squat shown. Use one hand lightly on a fixed upright and hold one DB; keep the rear foot on the floor.',
-  },
   'unica-arm-curl': {
     ...file('machine-preacher-curl', 12, {
       ...wger,
@@ -259,46 +231,6 @@ const fileDemos: Readonly<Record<string, ExerciseDemo>> = {
     }),
     match: 'movement',
   },
-  'standing-one-leg-cable-curl': {
-    ...file('seated-leg-curl', 12, {
-      ...wger,
-      creditUrl:
-        'https://wger.de/media/exercise-video/366/43df4b79-d4c3-4fbf-bcb5-e0d825b84120.MOV',
-    }),
-    match: 'related',
-    difference:
-      'A seated machine curl is shown. Stand at the low cable with the ankle strap; the knee-curl path is the same.',
-  },
-  'supported-single-leg-standing-db-calf-raise': {
-    ...file('standing-calf-raise', 12, {
-      ...wger,
-      creditUrl:
-        'https://wger.de/media/exercise-video/622/461171e5-2b16-407d-bf27-27aeef43f105.MOV',
-    }),
-    match: 'related',
-    difference:
-      'Two-leg step calf raise shown. Do one leg at a time on the floor with one DB, holding a fixed upright lightly for balance.',
-  },
-  'supported-bodyweight-single-leg-calf-raise': {
-    ...file('standing-calf-raise', 12, {
-      ...wger,
-      creditUrl:
-        'https://wger.de/media/exercise-video/622/461171e5-2b16-407d-bf27-27aeef43f105.MOV',
-    }),
-    match: 'related',
-    difference:
-      'Two-leg step calf raise shown. Do one leg at a time on the floor without added load, holding a fixed upright lightly for balance.',
-  },
-  'seated-db-calf-raise': {
-    ...file('seated-calf-raise', 12, {
-      ...wger,
-      creditUrl:
-        'https://wger.de/media/exercise-video/590/a325ae2e-686b-4a1f-aff2-ba37fa3fa157.MOV',
-    }),
-    match: 'related',
-    difference:
-      'A seated calf machine is shown. Rest dumbbells on your thighs instead, never on the kneecaps.',
-  },
 };
 
 export const demos: Readonly<Partial<Record<string, ExerciseDemo>>> = {
@@ -313,12 +245,6 @@ export const demos: Readonly<Partial<Record<string, ExerciseDemo>>> = {
     difference:
       'A fixed straight bar is shown. Use your fixed handles, curl the pelvis toward the ribs and avoid swinging.',
   },
-  'dip-station-knee-raise': {
-    ...vimeo('1130705496'),
-    match: 'related',
-    difference:
-      'Hanging from a bar is shown. Hold yourself up on straight arms on the dip handles instead; the pelvic curl is the same.',
-  },
   'smith-flat-bench-press': {
     ...vimeo('223935810'),
     match: 'movement',
@@ -327,22 +253,59 @@ export const demos: Readonly<Partial<Record<string, ExerciseDemo>>> = {
     ...vimeo('363596447'),
     match: 'movement',
   },
+  'unica-lat-pulldown': {
+    ...youtube('EUIri47Epcg'),
+    match: 'related',
+    difference: 'Dedicated pulldown machine shown. Use the UNICA lat bar on the high hook.',
+  },
+  'unica-seated-row': {
+    ...youtube('_FrrYQxA6kc'),
+    match: 'related',
+    difference:
+      'Another chest-supported row machine is shown. Use the UNICA seated-row long bars with your torso against the pad.',
+  },
   'machine-pec-fly': {
-    ...vimeo('223935831'),
+    ...youtube('FDay9wFe5uE'),
     match: 'movement',
   },
   'machine-reverse-fly': {
-    ...vimeo('223935802'),
+    ...youtube('5YK4bgzXDp0'),
+    match: 'movement',
+  },
+  'one-arm-standing-cable-fly': {
+    ...youtube('6svKUFLUEYM'),
     match: 'movement',
   },
   'low-incline-smith-press': {
-    ...vimeo('223933646'),
-    match: 'related',
-    difference:
-      'Free-bar incline press shown. Use the Smith machine fixed track with the bench at a low incline and safety stops set.',
+    ...youtube('8urE8Z8AMQ4'),
+    match: 'movement',
   },
   'incline-db-curl': {
     ...youtube('aTYlqC_JacQ'),
+    match: 'movement',
+  },
+  'supported-db-stationary-split-squat': {
+    ...youtube('cFJvAo9mEr4'),
+    match: 'movement',
+  },
+  'standing-one-leg-cable-curl': {
+    ...youtube('OA7c_8HfdOw'),
+    match: 'movement',
+  },
+  'supported-single-leg-standing-db-calf-raise': {
+    ...youtube('PTn6icEeH3Y'),
+    match: 'movement',
+  },
+  'supported-bodyweight-single-leg-calf-raise': {
+    ...youtube('qPd73snQfUs'),
+    match: 'movement',
+  },
+  'seated-db-calf-raise': {
+    ...youtube('nZACuG67cdg'),
+    match: 'movement',
+  },
+  'dip-station-knee-raise': {
+    ...youtube('vZUAU5IhSQQ'),
     match: 'movement',
   },
   'db-wrist-curl': {
@@ -350,29 +313,24 @@ export const demos: Readonly<Partial<Record<string, ExerciseDemo>>> = {
     match: 'movement',
   },
   'cable-wrist-curl': {
-    ...youtube('WVAaKJvToe0'),
-    match: 'related',
-    difference:
-      'Standing behind-the-back cable wrist curl shown. You can also sit on a bench with forearms on your thighs using the UNICA lat bar on the low hook.',
+    ...youtube('rLxCJTTvHO0'),
+    match: 'movement',
   },
   'db-reverse-wrist-curl': {
     ...youtube('osYPwlBiCRM'),
     match: 'movement',
   },
   'cable-reverse-wrist-curl': {
-    ...youtube('osYPwlBiCRM'),
-    match: 'related',
-    difference:
-      'Shown with DBs. Hold the UNICA lat bar from the low hook instead, palms down; the wrist movement is the same.',
+    ...youtube('mT7O9obtQII'),
+    match: 'movement',
   },
   'db-reverse-curl': {
     ...youtube('hUA-fIpM7nA'),
     match: 'movement',
   },
   'cable-reverse-curl': {
-    ...youtube('hUA-fIpM7nA'),
-    match: 'related',
-    difference: 'Shown with DBs. Hold the UNICA lat bar from the low hook instead, palms down.',
+    ...youtube('17qi9Xmeios'),
+    match: 'movement',
   },
   'floor-reverse-crunch': {
     ...youtube('XY8KzdDcMFg'),

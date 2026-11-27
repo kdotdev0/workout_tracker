@@ -1,10 +1,94 @@
 {
+  "EUIri47Epcg": {
+    "title": "Normal Grip Pulldown",
+    "author": "Renaissance Periodization",
+    "poster": "https://i.ytimg.com/vi/EUIri47Epcg/hqdefault.jpg",
+    "durationSeconds": 15,
+    "sourceUrl": "https://www.youtube.com/watch?v=EUIri47Epcg"
+  },
+  "_FrrYQxA6kc": {
+    "title": "Machine Chest Supported Row",
+    "author": "Renaissance Periodization",
+    "poster": "https://i.ytimg.com/vi/_FrrYQxA6kc/hqdefault.jpg",
+    "durationSeconds": 14,
+    "sourceUrl": "https://www.youtube.com/watch?v=_FrrYQxA6kc"
+  },
+  "FDay9wFe5uE": {
+    "title": "Machine Flye",
+    "author": "Renaissance Periodization",
+    "poster": "https://i.ytimg.com/vi/FDay9wFe5uE/hqdefault.jpg",
+    "durationSeconds": 17,
+    "sourceUrl": "https://www.youtube.com/watch?v=FDay9wFe5uE"
+  },
+  "5YK4bgzXDp0": {
+    "title": "Machine Reverse Flye",
+    "author": "Renaissance Periodization",
+    "poster": "https://i.ytimg.com/vi/5YK4bgzXDp0/hqdefault.jpg",
+    "durationSeconds": 14,
+    "sourceUrl": "https://www.youtube.com/watch?v=5YK4bgzXDp0"
+  },
+  "6svKUFLUEYM": {
+    "title": "Single Arm Cable Fly - OPEX Exercise Library",
+    "author": "OPEX Fitness",
+    "poster": "https://i.ytimg.com/vi/6svKUFLUEYM/hqdefault.jpg",
+    "durationSeconds": 13,
+    "sourceUrl": "https://www.youtube.com/watch?v=6svKUFLUEYM"
+  },
+  "8urE8Z8AMQ4": {
+    "title": "Smith Machine Incline Press",
+    "author": "Renaissance Periodization",
+    "poster": "https://i.ytimg.com/vi/8urE8Z8AMQ4/hqdefault.jpg",
+    "durationSeconds": 13,
+    "sourceUrl": "https://www.youtube.com/watch?v=8urE8Z8AMQ4"
+  },
   "aTYlqC_JacQ": {
     "title": "Incline Dumbbell Curl",
     "author": "Renaissance Periodization",
     "poster": "https://i.ytimg.com/vi/aTYlqC_JacQ/hqdefault.jpg",
     "durationSeconds": 17,
     "sourceUrl": "https://www.youtube.com/watch?v=aTYlqC_JacQ"
+  },
+  "cFJvAo9mEr4": {
+    "title": "Dumbbell Split Squat (Contralateral, Supported, In Rack)",
+    "author": "Resolve Performance",
+    "poster": "https://i.ytimg.com/vi/cFJvAo9mEr4/hqdefault.jpg",
+    "durationSeconds": 50,
+    "sourceUrl": "https://www.youtube.com/watch?v=cFJvAo9mEr4"
+  },
+  "OA7c_8HfdOw": {
+    "title": "Standing Cable Hamstring Curl",
+    "author": "GCP Fitness",
+    "poster": "https://i.ytimg.com/vi/OA7c_8HfdOw/hqdefault.jpg",
+    "durationSeconds": 32,
+    "sourceUrl": "https://www.youtube.com/watch?v=OA7c_8HfdOw"
+  },
+  "PTn6icEeH3Y": {
+    "title": "Standing single leg dumbbell calf raises",
+    "author": "FITTR",
+    "poster": "https://i.ytimg.com/vi/PTn6icEeH3Y/hqdefault.jpg",
+    "durationSeconds": 12,
+    "sourceUrl": "https://www.youtube.com/watch?v=PTn6icEeH3Y"
+  },
+  "qPd73snQfUs": {
+    "title": "Single-Leg Calf Raise (HSS)",
+    "author": "Hospital for Special Surgery",
+    "poster": "https://i.ytimg.com/vi/qPd73snQfUs/hqdefault.jpg",
+    "durationSeconds": 31,
+    "sourceUrl": "https://www.youtube.com/watch?v=qPd73snQfUs"
+  },
+  "nZACuG67cdg": {
+    "title": "Dumbbell Seated Calf Raises",
+    "author": "My PT Hub",
+    "poster": "https://i.ytimg.com/vi/nZACuG67cdg/hqdefault.jpg",
+    "durationSeconds": 15,
+    "sourceUrl": "https://www.youtube.com/watch?v=nZACuG67cdg"
+  },
+  "vZUAU5IhSQQ": {
+    "title": "Dip Bar Knee Raise",
+    "author": "UNBROKEN FITNESS SOLUTIONS",
+    "poster": "https://i.ytimg.com/vi/vZUAU5IhSQQ/hqdefault.jpg",
+    "durationSeconds": 24,
+    "sourceUrl": "https://www.youtube.com/watch?v=vZUAU5IhSQQ"
   },
   "3rsKOL8scsU": {
     "title": "Seated Dumbbell Palms-Up Wrist Curl",
@@ -13,12 +97,12 @@
     "durationSeconds": 14,
     "sourceUrl": "https://www.youtube.com/watch?v=3rsKOL8scsU"
   },
-  "WVAaKJvToe0": {
-    "title": "Cable Wrist Curl",
-    "author": "Renaissance Periodization",
-    "poster": "https://i.ytimg.com/vi/WVAaKJvToe0/hqdefault.jpg",
-    "durationSeconds": 12,
-    "sourceUrl": "https://www.youtube.com/watch?v=WVAaKJvToe0"
+  "rLxCJTTvHO0": {
+    "title": "Seated Cable Wrist Curl",
+    "author": "Kas Kuvvet",
+    "poster": "https://i.ytimg.com/vi/rLxCJTTvHO0/hqdefault.jpg",
+    "durationSeconds": 16,
+    "sourceUrl": "https://www.youtube.com/watch?v=rLxCJTTvHO0"
   },
   "osYPwlBiCRM": {
     "title": "Dumbbell Reverse Wrist Curl",
@@ -27,12 +111,26 @@
     "durationSeconds": 11,
     "sourceUrl": "https://www.youtube.com/watch?v=osYPwlBiCRM"
   },
+  "mT7O9obtQII": {
+    "title": "Reverse Grip Seated Cable Wrist Curl",
+    "author": "Kas Kuvvet",
+    "poster": "https://i.ytimg.com/vi/mT7O9obtQII/hqdefault.jpg",
+    "durationSeconds": 19,
+    "sourceUrl": "https://www.youtube.com/watch?v=mT7O9obtQII"
+  },
   "hUA-fIpM7nA": {
     "title": "Dumbbell Reverse Curl - OPEX Exercise Library",
     "author": "OPEX Fitness",
     "poster": "https://i.ytimg.com/vi/hUA-fIpM7nA/hqdefault.jpg",
     "durationSeconds": 15,
     "sourceUrl": "https://www.youtube.com/watch?v=hUA-fIpM7nA"
+  },
+  "17qi9Xmeios": {
+    "title": "Straight Bar Cable Reverse Curl",
+    "author": "Leo Fontana",
+    "poster": "https://i.ytimg.com/vi/17qi9Xmeios/hqdefault.jpg",
+    "durationSeconds": 8,
+    "sourceUrl": "https://www.youtube.com/watch?v=17qi9Xmeios"
   },
   "XY8KzdDcMFg": {
     "title": "How To Do A Reverse Crunch",

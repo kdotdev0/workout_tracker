@@ -69,7 +69,7 @@ Every push to `main` runs `.github/workflows/check.yml`. The `deploy.yml` workfl
 
 - Muscle maps: [wger](https://wger.de), CC BY-SA 4.0, with colours changed. See `public/muscles/LICENSE.txt`.
 - Exercise illustrations: [Workout Guide](https://github.com/bryllim/workout-guide) / [Everkinetic](https://github.com/everkinetic/data), CC BY-SA 4.0. See `public/exercises/ATTRIBUTION.md`.
-- Exercise demonstrations: real-human gym videos cover every current primary exercise, swap and retained historical guide: 24 bundled local clips (Your Move free collection and CC BY-SA Goulart / wger), seven verified Vimeo clips and eight tap-to-play privacy-enhanced YouTube embeds. Previews use the matching clip poster. See `public/demos/ATTRIBUTION.md` and `docs/SHORT-DEMO-AUDIT.md` for sources and checks. Videos need internet and start after a tap.
+- Exercise demonstrations: real-human gym videos cover every current primary exercise, swap and retained historical guide: 19 active local clips (Your Move free collection and CC BY-SA Goulart / wger), four verified Vimeo clips and 22 tap-to-play privacy-enhanced YouTube embeds matched 1:1 to each setup. Previews use the matching clip poster. See `public/demos/ATTRIBUTION.md` and `docs/SHORT-DEMO-AUDIT.md` for sources and checks. Videos need internet and start after a tap.
 - Fonts: Geist and Bricolage Grotesque, OFL.
 
 No licence has been chosen for the app's source code. The third-party assets keep their own licences.
