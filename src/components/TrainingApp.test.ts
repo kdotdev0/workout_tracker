@@ -8,6 +8,13 @@ import { emptyState, encodeBackup, sessionSchema, type AppState } from '../domai
 import legacySessions from '../domain/__fixtures__/legacy-programme-sessions.json';
 import { WorkoutDatabase } from '../storage/database';
 
+// JSDOM does not implement 2D canvas contexts required by canvas-confetti.
+vi.mock('canvas-confetti', () => ({
+  default: {
+    create: () => Object.assign(() => new Promise<null>(() => {}), { reset: () => undefined }),
+  },
+}));
+
 const wrappers: VueWrapper[] = [];
 const databaseName = 'steady-workout-v1';
 beforeEach(() => {
@@ -109,7 +116,7 @@ describe('working app integration', () => {
     wrappers.push(wrapper);
     // The 13 November workout was left open a week ago: it is finished at its last set, logs intact.
     await vi.waitFor(() => expect(wrapper.text()).toContain('Finished Lower B you left open.'));
-    expect(wrapper.find('[data-confetti]').exists()).toBe(false);
+    expect(document.querySelector('[data-confetti]')).toBeNull();
     await wrapper.get('input[type="date"]').setValue('2026-11-13');
     expect(wrapper.text()).toContain('Barbell deadlift');
     expect(wrapper.text()).toContain('View in history');
@@ -513,7 +520,7 @@ describe('working app integration', () => {
       .find((entry) => entry.textContent?.trim() === 'Finish anyway')!
       .click();
     await vi.waitFor(() => expect(wrapper.text()).toContain('Completed · partial'));
-    expect(wrapper.find('[data-confetti]').exists()).toBe(true);
+    expect(document.querySelector('[data-confetti]')).not.toBeNull();
     expect(wrapper.text()).toContain('Upper A finished. Nice work.');
     expect((await savedData()).sessions[0]!.status).toBe('completed');
     expect((await savedData()).timer).toBeNull();

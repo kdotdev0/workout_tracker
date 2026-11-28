@@ -1,66 +1,59 @@
 import { mount } from '@vue/test-utils';
 import { afterEach, describe, expect, it, vi } from 'vitest';
+import confetti from 'canvas-confetti';
 import WorkoutConfetti from './WorkoutConfetti.vue';
 
-function mockContext() {
-  return {
-    setTransform: vi.fn(),
-    clearRect: vi.fn(),
-    save: vi.fn(),
-    restore: vi.fn(),
-    translate: vi.fn(),
-    rotate: vi.fn(),
-    beginPath: vi.fn(),
-    arc: vi.fn(),
-    fill: vi.fn(),
-    fillRect: vi.fn(),
-    globalAlpha: 1,
-    fillStyle: '',
-  } as unknown as CanvasRenderingContext2D;
-}
+vi.mock('canvas-confetti', () => ({
+  default: {
+    create: vi.fn(),
+  },
+}));
 
 afterEach(() => {
-  vi.restoreAllMocks();
+  vi.clearAllMocks();
   vi.unstubAllGlobals();
   vi.useRealTimers();
+  document.body.innerHTML = '';
 });
 
 describe('workout completion confetti', () => {
-  it('renders a non-interactive canvas, animates particles, and emits done when finished', () => {
-    const ctx = mockContext();
-    vi.spyOn(HTMLCanvasElement.prototype, 'getContext').mockReturnValue(ctx);
-    let now = 0;
-    vi.spyOn(performance, 'now').mockImplementation(() => now);
-    const frames: FrameRequestCallback[] = [];
-    vi.spyOn(window, 'requestAnimationFrame').mockImplementation((callback) => {
-      frames.push(callback);
-      return frames.length;
-    });
+  it('teleports a non-interactive canvas to body, fires bursts via canvas-confetti, and emits done', async () => {
+    vi.useFakeTimers();
+    const resolvers: Array<() => void> = [];
+    const fire = Object.assign(
+      vi.fn(
+        () =>
+          new Promise<null>((resolve) => {
+            resolvers.push(() => resolve(null));
+          }),
+      ),
+      { reset: vi.fn() },
+    );
+    vi.mocked(confetti.create).mockReturnValue(fire);
 
     const wrapper = mount(WorkoutConfetti);
-    const canvas = wrapper.get('[data-confetti]');
-    expect(canvas.attributes('aria-hidden')).toBe('true');
-    expect(canvas.classes()).toContain('pointer-events-none');
-    expect(frames).toHaveLength(1);
-
-    // Mid-burst frame draws particles.
-    now = 300;
-    frames.shift()!(now);
-    expect(ctx.clearRect).toHaveBeenCalled();
-    expect(
-      (ctx.fillRect as ReturnType<typeof vi.fn>).mock.calls.length +
-        (ctx.fill as ReturnType<typeof vi.fn>).mock.calls.length,
-    ).toBeGreaterThan(0);
+    const canvas = document.body.querySelector<HTMLCanvasElement>('[data-confetti]');
+    expect(canvas).not.toBeNull();
+    expect(canvas!.getAttribute('aria-hidden')).toBe('true');
+    expect(canvas!.classList.contains('pointer-events-none')).toBe(true);
+    expect(confetti.create).toHaveBeenCalledWith(canvas, { resize: true, useWorker: false });
+    // Dual side cannons fire immediately.
+    expect(fire).toHaveBeenCalledTimes(2);
     expect(wrapper.emitted('done')).toBeUndefined();
 
-    // Past the animation duration clears the canvas and signals completion.
-    now = 3000;
-    frames.shift()!(now);
-    expect(wrapper.emitted('done')).toHaveLength(1);
+    // Delayed center burst fires after 160 ms.
+    await vi.advanceTimersByTimeAsync(160);
+    expect(fire).toHaveBeenCalledTimes(3);
+
+    // Resolving all bursts signals completion.
+    for (const resolve of resolvers) resolve();
+    await vi.waitFor(() => expect(wrapper.emitted('done')).toHaveLength(1));
+
     wrapper.unmount();
+    expect(fire.reset).toHaveBeenCalledTimes(1);
   });
 
-  it('respects prefers-reduced-motion by skipping the animation and emitting done immediately', () => {
+  it('respects prefers-reduced-motion by skipping canvas-confetti and emitting done immediately', () => {
     vi.stubGlobal(
       'matchMedia',
       vi.fn().mockImplementation(
@@ -77,21 +70,22 @@ describe('workout completion confetti', () => {
           }) as unknown as MediaQueryList,
       ),
     );
-    const raf = vi.spyOn(window, 'requestAnimationFrame');
 
     const wrapper = mount(WorkoutConfetti);
-    expect(raf).not.toHaveBeenCalled();
+    expect(confetti.create).not.toHaveBeenCalled();
     expect(wrapper.emitted('done')).toHaveLength(1);
     wrapper.unmount();
   });
 
-  it('cancels animation frames cleanly on unmount', () => {
-    vi.spyOn(HTMLCanvasElement.prototype, 'getContext').mockReturnValue(mockContext());
-    vi.spyOn(window, 'requestAnimationFrame').mockReturnValue(42);
-    const cancel = vi.spyOn(window, 'cancelAnimationFrame').mockImplementation(() => {});
+  it('resets the confetti instance cleanly when unmounted mid-burst', () => {
+    const fire = Object.assign(
+      vi.fn(() => new Promise<null>(() => {})),
+      { reset: vi.fn() },
+    );
+    vi.mocked(confetti.create).mockReturnValue(fire);
 
     const wrapper = mount(WorkoutConfetti);
     wrapper.unmount();
-    expect(cancel).toHaveBeenCalledWith(42);
+    expect(fire.reset).toHaveBeenCalledTimes(1);
   });
 });
