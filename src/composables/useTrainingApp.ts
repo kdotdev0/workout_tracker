@@ -25,6 +25,8 @@ export function useTrainingApp() {
   const override = shallowRef<WorkoutId | null | undefined>(undefined);
   const sessionId = shallowRef<string | null>(null);
   const message = shallowRef('');
+  const celebrating = shallowRef(false);
+  const celebrationKey = shallowRef(0);
 
   // A workout logged on this day wins over the weekly template, so a switch sticks.
   const workoutId = computed(() => {
@@ -86,6 +88,9 @@ export function useTrainingApp() {
     clearTimeout(hideMessage);
     message.value = '';
   }
+  function dismissCelebration() {
+    celebrating.value = false;
+  }
 
   const pushups = usePushups({ state, today, update, notify });
   const supplements = useSupplements({ state, date, update, notify });
@@ -98,8 +103,13 @@ export function useTrainingApp() {
     update,
     notify,
     open,
-    onFinished: () => {
+    onFinished: async (session) => {
+      celebrating.value = true;
+      celebrationKey.value++;
+      navigator.vibrate?.([20, 60, 35]);
       view.value = 'history';
+      await nextTick();
+      notify(`${programme[session.workoutId].name} finished. Nice work.`);
     },
   });
 
@@ -177,6 +187,9 @@ export function useTrainingApp() {
     missed,
     message,
     dismissMessage,
+    celebrating,
+    celebrationKey,
+    dismissCelebration,
     changeDate,
     chooseWorkout,
     open,

@@ -19,7 +19,7 @@ interface Deps extends TrainingActions {
   draft: Readonly<Ref<Session | null>>;
   currentSession: Readonly<Ref<Session | null>>;
   open: (id: string) => void;
-  onFinished: () => void;
+  onFinished: (session: Session) => void;
 }
 
 /** Workout writes and their timer deadlines, independent of the app's navigation implementation. */
@@ -113,7 +113,7 @@ export function useWorkoutSessions({
         timer: current.timer?.sessionId === active.id ? null : current.timer,
       }))
     )
-      onFinished();
+      onFinished(active);
   }
   return { begin, saveSet, swap, swapFromPlan, finish };
 }

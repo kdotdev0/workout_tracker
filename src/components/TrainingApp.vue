@@ -15,6 +15,7 @@ import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import AppToast from './AppToast.vue';
 import UpdatePrompt from './UpdatePrompt.vue';
+import WorkoutConfetti from './WorkoutConfetti.vue';
 import HistoryView from '@/views/HistoryView.vue';
 import PushupsView from '@/views/PushupsView.vue';
 import SessionView from '@/views/SessionView.vue';
@@ -187,6 +188,11 @@ async function recordPushups(day: string, reps: number, onSaved?: () => void) {
     </main>
 
     <AppToast :message="app.message.value" @dismiss="app.dismissMessage" />
+    <WorkoutConfetti
+      v-if="app.celebrating.value"
+      :key="app.celebrationKey.value"
+      @done="app.dismissCelebration"
+    />
     <UpdatePrompt :busy="busy" />
 
     <!-- Hidden mid-workout so a stray tap cannot leave the session; "Back to plan" exits. -->
